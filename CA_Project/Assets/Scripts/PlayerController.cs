@@ -44,6 +44,11 @@ public class PlayerController : MonoBehaviour
         fearLevel();
     }
 
+    void LateUpdate()
+    {
+        fear = 0;
+    }
+
     void movement()
     {
         //Gets input on vertical and horizontal axis
@@ -116,7 +121,11 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log("Fear: " + fear);
+    }
 
-        fear = 0;
+    public int getFear()
+    {
+        Debug.Log("Return fear: " + fear);
+        return fear;
     }
 }
