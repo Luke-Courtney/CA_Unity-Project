@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Movement
     public float speed = 10.0f;
     public float maxSpeed = 10.0f;
     public float turnSpeed;
 
+    //Flashlight
+    private Light flashlight;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        flashlight = GameObject.Find("Flashlight").GetComponent<Light>();
     }
 
     // Update is called once per frame
