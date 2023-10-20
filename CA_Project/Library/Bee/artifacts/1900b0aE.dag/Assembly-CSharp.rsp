@@ -350,6 +350,7 @@
 "Assets/NavMeshComponents/Scripts/NavMeshModifierVolume.cs"
 "Assets/NavMeshComponents/Scripts/NavMeshSurface.cs"
 "Assets/Scripts/EnemyController.cs"
+"Assets/Scripts/FlashlightDamage.cs"
 "Assets/Scripts/FollowPlayer.cs"
 "Assets/Scripts/PlayerController.cs"
 -langversion:9.0

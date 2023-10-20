@@ -9,10 +9,11 @@ public class EnemyController : MonoBehaviour
 
     private Light eyeLight;
 
+    private float health = 10.0f;
+
     private GameObject player;    //Player gameobject
     private float playerDistance; //How far is the player?
-    private bool chasing;         //Is the enemy chasing the player?
-    public float detectionRange = 5;
+    public float detectionRange = 10;   //How far away does the enemy detect the player?
 
     void Start()
     {
@@ -39,18 +40,33 @@ public class EnemyController : MonoBehaviour
         {
                 //Moving NavMesh Agent
                 agent.SetDestination(playerPos);
-                
-                chasing = true;
 
                 //Setting eyeLight narrower and more intense
-                eyeLight.spotAngle = 45f;
-                eyeLight.intensity = 5f;
+                if(eyeLight != null)
+                {
+                    eyeLight.spotAngle = 45f;
+                    eyeLight.intensity = 5f;
+                }
+                
         }
         else
         {
-            chasing = false;
-            eyeLight.spotAngle = 125f;
-            eyeLight.intensity = 1.5f;
+            if(eyeLight != null)
+            {
+                eyeLight.spotAngle = 125f;
+                eyeLight.intensity = 1.5f;
+            }
+        }
+    }
+
+    //Damage Enemy
+    public void damage(float damage, float range)
+    {
+        health -= (damage*(10-range))*Time.deltaTime;
+
+        if(health<=1)
+        {
+            Destroy(gameObject);
         }
     }
 }
