@@ -12,17 +12,36 @@ public class PlayerController : MonoBehaviour
     //Flashlight
     private Light flashlight;
 
+    //All enemies in scene
+    public GameObject[] enemiesArray;
+    List<GameObject> enemiesList;
+
+    //Fear level
+    private int fear = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         flashlight = GameObject.Find("Flashlight").GetComponent<Light>();
+
+        //Finding all enemies in scene with array
+        enemiesArray = GameObject.FindGameObjectsWithTag("Enemy");
+        enemiesList = new List<GameObject>();
+
+        //Adding all enemies in scene to list
+        for(int i=0; i<enemiesArray.Length; i++)
+        {
+            enemiesList.Add(enemiesArray[i]);
+        }
     }
 
+    int i = 1;
     // Update is called once per frame
     void Update()
     {
         movement();
         faceMouse();
+        fearLevel();
     }
 
     void movement()
@@ -43,7 +62,6 @@ public class PlayerController : MonoBehaviour
     }
 
     //Find the angle between two points
-    //https://discussions.unity.com/t/make-a-player-model-rotate-towards-mouse-location/125354
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
     {
 		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
@@ -66,5 +84,39 @@ public class PlayerController : MonoBehaviour
 
 		//Rotate
 		transform.rotation =  Quaternion.Euler (new Vector3(0f,angle,0f));
+    }
+
+    //Loops through list and deletes null objects
+    void updateEnemyList()
+    {
+        for(int i=0; i<enemiesList.Count; i++)
+            {
+                if(enemiesList[i] == null)
+                {
+                    enemiesList.RemoveAt(i);
+                }
+            }
+    }
+
+    //Determines how many enemies are chasing
+    void fearLevel()
+    {
+        updateEnemyList();
+
+        //Looping through list of all enemies
+        if(enemiesList.Count != 0)
+        { 
+            for(int i=0; i<enemiesList.Count; i++)
+            {
+                if(enemiesList[i].GetComponent<EnemyController>().isChasing())
+                {
+                    fear++;
+                }
+            }
+        }
+
+        Debug.Log("Fear: " + fear);
+
+        fear = 0;
     }
 }
