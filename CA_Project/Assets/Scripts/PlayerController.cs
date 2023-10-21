@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    int i = 1;
     // Update is called once per frame
     void Update()
     {
@@ -233,6 +232,16 @@ public class PlayerController : MonoBehaviour
                 //Turning off health pickup after use
                 Destroy(other.gameObject);
             }
+        }
+
+        //If collided with battery pickup, and it isnt null
+        if(other.GetComponent<Collider>() != null && other.GetComponent<Collider>().gameObject.CompareTag("Battery"))
+        {
+            //Reset battery to 100%
+            GetComponent<FlashlightDamage>().RechargeBattery();
+
+            //Turning off battery pickup after use
+            Destroy(other.gameObject);
         }
     }
 }

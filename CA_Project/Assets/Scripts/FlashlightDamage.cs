@@ -4,30 +4,62 @@ using UnityEngine;
 
 public class FlashlightDamage : MonoBehaviour
 {
-    public float flashlightRange = 10.0f;
+    //Damage beam
+    private float flashlightDefaultIntensity = 5.0f;
+    public float flashlightDamageRange = 10.0f;
     public float damage = 10.0f;
+    private Light flashlight;
+
+    //Battery
+    private float batteryLevel = 100;
+    private float defaultBatteryDrainRate = 0.5f;
+    public float batteryDrainRate = 0.5f;
+
+    //Wave manager
+    private WaveManager waveManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
+        flashlight = GameObject.Find("Flashlight").GetComponent<Light>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        DamageBeam();
+        DepleteBattery();
+    }
+
+    void DamageBeam()
+    {
         // Create a ray that starts at the position of the game object and extends forwards.
         Ray ray = new Ray(transform.position, transform.forward);
 
         // Perform a raycast using the ray.
-        if (Physics.Raycast(ray, out RaycastHit hit, flashlightRange) && hit.collider.gameObject.tag == "Enemy")
+        //If enemy is hit
+        if (Physics.Raycast(ray, out RaycastHit hit, (flashlightDamageRange*(batteryLevel/100))) && hit.collider.gameObject.tag == "Enemy")
         {
-            // If the raycast hits an object, print the name of the object to the console.
-            Debug.DrawLine(ray.origin, hit.point, Color.green, 2, false);
-            
-            //If enemy is hit
             EnemyController enemy = hit.collider.GetComponent<EnemyController>();
             enemy.damage(damage, hit.distance);
         }
+    }
+
+    void DepleteBattery()
+    {
+        batteryLevel = batteryLevel - (batteryDrainRate*Time.deltaTime);
+        flashlight.intensity = flashlightDefaultIntensity * (batteryLevel/100);
+
+        //Increasing battery drain rate
+        if(batteryDrainRate < 2.5){
+            batteryDrainRate = defaultBatteryDrainRate + ((waveManager.GetTime()/60)/2);
+        }
+    }
+
+    //Set the battery back to 100%
+    public void RechargeBattery()
+    {
+        batteryLevel = 100;
     }
 }

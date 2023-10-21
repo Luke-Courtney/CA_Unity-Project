@@ -1695,8 +1695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f410a4c978a4e43a97783b7103ca15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashlightRange: 8
+  flashlightDamageRange: 10
   damage: 1
+  batteryDrainRate: 0.5
 --- !u!135 &778858712
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1903,7 +1904,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1520493524710987232, guid: 6ba9b52d6c5f1d94d9f60d038658a1a3, type: 3}
   healthPrefab: {fileID: 3011599310039552474, guid: 48c54da7823912e4e83a632dd1d5ac35, type: 3}
+  batteryPrefab: {fileID: 7519459784696616971, guid: f6c558b2cde8c7e45b3e86202c2b49c3, type: 3}
   enemySpawnInterval: 10
+  healthSpawnInterval: 45
+  batterySpawnInterval: 30
   displaySeconds: 0
 --- !u!4 &791966972
 Transform:
