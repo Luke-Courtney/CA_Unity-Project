@@ -356,6 +356,7 @@
 "Assets/Scripts/FlashlightDamage.cs"
 "Assets/Scripts/FollowPlayer.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/WaveManager.cs"
 -langversion:9.0
 
 /deterministic

@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.Find("Player");
         eyeLight = GameObject.Find("EyeLight").GetComponent<Light>();
+        chasing = false;
+        eyes();
     }
 
     void Update()
@@ -42,24 +44,33 @@ public class EnemyController : MonoBehaviour
             //Moving NavMesh Agent
             agent.SetDestination(playerPos);
 
-            //Setting eyeLight narrower and more intense
-            if(eyeLight != null)
-            {
-                eyeLight.spotAngle = 45f;
-                eyeLight.intensity = 5f;
-            }
-                
             chasing = true;
         }
         else
         {
-            if(eyeLight != null)
-            {
-                eyeLight.spotAngle = 125f;
-                eyeLight.intensity = 1.5f;
-            }
-
             chasing = false;
+        }
+
+        eyes();
+    }
+
+    //Sets eyelight state
+    void eyes()
+    {
+        if(eyeLight != null)
+        {
+            if(chasing)
+            {
+                Debug.Log("Tracking");
+                eyeLight.spotAngle = 45f;
+                eyeLight.intensity = 5f;
+            }
+            else
+            {
+                Debug.Log("Not Tracking");
+                eyeLight.spotAngle = 125f;
+                eyeLight.intensity = 2.5f;
+            }
         }
     }
 

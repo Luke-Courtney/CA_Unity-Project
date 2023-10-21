@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638334123831341879
-    m_Hash: 2293531964
+      ticks: 638334812281264888
+    m_Hash: 156888637
   m_LockFileStatus:
     m_FilePath: C:/Users/Luke/CA_Unity-Project/CA_Project/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638334123831461904
-    m_Hash: 2892216316
+      ticks: 638334812281279891
+    m_Hash: 915549958
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
