@@ -20,8 +20,6 @@ public class FollowPlayer : MonoBehaviour
         //Sets camera position to that of player position + offset
         targetPos = player.transform.position + offset;   
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
-
-        Debug.Log(offset);
     }
 
     void fearZoom()
@@ -31,7 +29,6 @@ public class FollowPlayer : MonoBehaviour
         {
             zoom = 8;
         }
-        Debug.Log(zoom);
         offset = new Vector3(defaultOffset.x ,defaultOffset.y-zoom, defaultOffset.z);
     }
 }
