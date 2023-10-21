@@ -75,15 +75,6 @@ public class PlayerController : MonoBehaviour
         }
     
         fearLevel();
-
-        if(Input.GetMouseButtonDown(0))
-        { 
-            damage();
-        }
-        if(Input.GetMouseButtonDown(1))
-        { 
-            heal();
-        }
     }
 
     void LateUpdate()
@@ -169,6 +160,11 @@ public class PlayerController : MonoBehaviour
         return fear;
     }
 
+    public bool isAlive()
+    {
+        return alive;
+    }
+
     //Remove 1 life and turn off light
     void damage()
     {
@@ -229,7 +225,6 @@ public class PlayerController : MonoBehaviour
         //If collided with health pickup, and it isnt null
         if(other.GetComponent<Collider>() != null && other.GetComponent<Collider>().gameObject.CompareTag("Health"))
         {
-            Debug.Log("Hit health pickup");
             if(lives<3){
                 heal();
                 hitTimer = 0;
