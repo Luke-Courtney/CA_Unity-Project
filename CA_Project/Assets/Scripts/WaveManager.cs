@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
     private float startDelay = 5.0f;
     private float defaultEnemySpawnInterval = 10.0f;
     public float enemySpawnInterval = 10.0f;
-    public float healthSpawnInterval = 45.0f;
+    public float healthSpawnInterval = 90.0f;
     public float batterySpawnInterval = 30.0f;
 
     //Playercontroller
@@ -53,7 +53,7 @@ public class WaveManager : MonoBehaviour
         //Update enemy spawn interval based on time into game
         //Every minute into the game reduces spawn interval by 1 second
         //To a minimum of 2 seconds.
-        if(enemySpawnInterval > 2)
+        if(enemySpawnInterval > 1)
         {
             enemySpawnInterval = defaultEnemySpawnInterval - (seconds/60);
         }
@@ -71,6 +71,8 @@ public class WaveManager : MonoBehaviour
         if(playerController.isAlive())
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 1.0f, Random.Range(-spawnRangeZ,spawnRangeZ));
+            spawnPos = NearestNavmeshPoint(spawnPos);
+            spawnPos.y = 1.0f;
             Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
         }
         
@@ -83,6 +85,8 @@ public class WaveManager : MonoBehaviour
         if(playerController.isAlive())
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
+            spawnPos = NearestNavmeshPoint(spawnPos);
+            spawnPos.y = 0.1f;
             Instantiate(healthPrefab, spawnPos, healthPrefab.transform.rotation);
         }
         
@@ -95,8 +99,25 @@ public class WaveManager : MonoBehaviour
         if(playerController.isAlive())
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
+            spawnPos = NearestNavmeshPoint(spawnPos);
+            spawnPos.y = 0.1f;
             Instantiate(batteryPrefab, spawnPos, batteryPrefab.transform.rotation);
         }
         
+    }
+
+    //Returns nearest point on navmesh to Vector3 Point
+    Vector3 NearestNavmeshPoint(Vector3 point)
+    {
+        UnityEngine.AI.NavMeshHit hit;
+        if(UnityEngine.AI.NavMesh.SamplePosition(point, out hit, 2.0f, UnityEngine.AI.NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        else
+        {
+            Debug.Log("No closest point on Navmesh found");
+            return point;
+        }
     }
 }
