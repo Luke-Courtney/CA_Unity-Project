@@ -18,11 +18,15 @@ public class FlashlightDamage : MonoBehaviour
     //Wave manager
     private WaveManager waveManager;
 
+    //Playercontroller
+    private PlayerController playerController;
+
     // Start is called before the first frame update
     void Start()
     {
         waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
         flashlight = GameObject.Find("Flashlight").GetComponent<Light>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -48,12 +52,19 @@ public class FlashlightDamage : MonoBehaviour
 
     void DepleteBattery()
     {
-        batteryLevel = batteryLevel - (batteryDrainRate*Time.deltaTime);
-        flashlight.intensity = flashlightDefaultIntensity * (batteryLevel/100);
+        if(playerController.isAlive())
+        {
+            batteryLevel = batteryLevel - (batteryDrainRate*Time.deltaTime);
+            flashlight.intensity = flashlightDefaultIntensity * (batteryLevel/100);
 
-        //Increasing battery drain rate
-        if(batteryDrainRate < 2.5){
-            batteryDrainRate = defaultBatteryDrainRate + ((waveManager.GetTime()/60)/2);
+            //Increasing battery drain rate
+            if(batteryDrainRate < 2.5){
+                batteryDrainRate = defaultBatteryDrainRate + ((waveManager.GetTime()/60)/2);
+            }
+        }
+        else
+        {
+            flashlight.intensity = 0;
         }
     }
 
