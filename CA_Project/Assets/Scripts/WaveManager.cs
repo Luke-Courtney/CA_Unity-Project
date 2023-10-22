@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    //Enemy and health prefabs
+    //Enemy, health and battery prefabs
     public GameObject enemyPrefab; 
     public GameObject healthPrefab;
+    public GameObject batteryPrefab;
 
     //Spawn parameters
     private float spawnRangeX = 49;
@@ -15,7 +16,8 @@ public class WaveManager : MonoBehaviour
     private float startDelay = 5.0f;
     private float defaultEnemySpawnInterval = 10.0f;
     public float enemySpawnInterval = 10.0f;
-    private float healthSpawnInterval = 45.0f;
+    public float healthSpawnInterval = 45.0f;
+    public float batterySpawnInterval = 30.0f;
 
     //Playercontroller
     private PlayerController playerController;
@@ -33,6 +35,7 @@ public class WaveManager : MonoBehaviour
         //Start spawning enemies and health
         InvokeRepeating("SpawnEnemy", startDelay, enemySpawnInterval);
         InvokeRepeating("SpawnHealth", startDelay, healthSpawnInterval);
+        InvokeRepeating("SpawnBattery", startDelay, batterySpawnInterval);
     }
 
     // Update is called once per frame
@@ -56,6 +59,11 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    public float GetTime()
+    {
+        return seconds;
+    }
+
     //Spawns enemy within range
     void SpawnEnemy()
     {     
@@ -68,6 +76,7 @@ public class WaveManager : MonoBehaviour
         
     }
 
+    //Spawns health pickups
     void SpawnHealth()
     {   
         //Only spawn new enemies if player is alive
@@ -75,6 +84,18 @@ public class WaveManager : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
             Instantiate(healthPrefab, spawnPos, healthPrefab.transform.rotation);
+        }
+        
+    }
+
+    //Spawns battery pickups
+    void SpawnBattery()
+    {   
+        //Only spawn new enemies if player is alive
+        if(playerController.isAlive())
+        {
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
+            Instantiate(batteryPrefab, spawnPos, batteryPrefab.transform.rotation);
         }
         
     }
