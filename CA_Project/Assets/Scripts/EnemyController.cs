@@ -16,6 +16,11 @@ public class EnemyController : MonoBehaviour
     public float detectionRange = 10;   //How far away does the enemy detect the player?
     private bool chasing;
 
+    //Wander
+    bool goingToPoint;
+    float wanderRange = 15.0f; 
+    Vector3 wanderPoint = new Vector3(999,999,999);
+
     void Start()
     {
         player = GameObject.Find("Player");
@@ -45,13 +50,16 @@ public class EnemyController : MonoBehaviour
             agent.SetDestination(playerPos);
 
             chasing = true;
+            goingToPoint = false;
+            agent.speed = 10.5f;
+            eyes();
         }
         else
         {
             chasing = false;
-        }
-
-        eyes();
+            wander();
+            eyes();
+        } 
     }
 
     //Sets eyelight state
@@ -59,15 +67,13 @@ public class EnemyController : MonoBehaviour
     {
         if(eyeLight != null)
         {
-            if(chasing)
+            if(agent.speed != 3)
             {
-                Debug.Log("Tracking");
                 eyeLight.spotAngle = 45f;
                 eyeLight.intensity = 5f;
             }
             else
-            {
-                Debug.Log("Not Tracking");
+            {  
                 eyeLight.spotAngle = 125f;
                 eyeLight.intensity = 2.5f;
             }
@@ -88,6 +94,44 @@ public class EnemyController : MonoBehaviour
         if(health<=1)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void wander()
+    {
+        if(Vector3.Distance(transform.position, wanderPoint)< 1.0f || wanderPoint == new Vector3(999,999,999))
+        {
+            //Generating new wanderPoint
+            wanderPoint = new Vector3(transform.position.x + Random.Range(-wanderRange,wanderRange), 0, transform.position.z + Random.Range(-wanderRange,wanderRange));
+            wanderPoint = NearestNavmeshPoint(wanderPoint);
+
+            //Going to point
+            agent.speed = 3;
+            agent.SetDestination(wanderPoint);
+            goingToPoint = true;
+        }
+        else
+        {
+            if(!chasing)
+            {
+                agent.speed = 3;
+            }
+            agent.SetDestination(wanderPoint);
+        }
+    }
+
+    //Returns nearest point on navmesh to Vector3 Point
+    Vector3 NearestNavmeshPoint(Vector3 point)
+    {
+        UnityEngine.AI.NavMeshHit hit;
+        if(UnityEngine.AI.NavMesh.SamplePosition(point, out hit, 15.0f, UnityEngine.AI.NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        else
+        {
+            Debug.Log("No closest point on Navmesh found");
+            return point;
         }
     }
 }
