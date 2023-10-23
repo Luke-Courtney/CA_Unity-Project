@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour
         audioSource.Play();
     }
 
+    int i = 1;
+
     // Update is called once per frame
     void Update()
     {
@@ -152,7 +154,19 @@ public class PlayerController : MonoBehaviour
     //Loops through list and deletes null objects
     void updateEnemyList()
     {
-        for(int i=0; i<enemiesList.Count; i++)
+        //Finding all enemies in scene with array
+        enemiesArray = GameObject.FindGameObjectsWithTag("Enemy");
+
+        //Clearing list
+        enemiesList.Clear();
+
+        //Add all enemies from array to list
+        for (int i = 0; i < enemiesArray.Length; i++)
+        {
+            enemiesList.Add(enemiesArray[i]);
+        }
+
+        for (int i=0; i<enemiesList.Count; i++)
         {
             if(enemiesList[i] == null)
             {
@@ -168,12 +182,16 @@ public class PlayerController : MonoBehaviour
 
         //Looping through list of all enemies
         if(enemiesList.Count != 0)
-        { 
+        {
+
+            Debug.Log("At least 1 enemy");
             for(int i=0; i<enemiesList.Count; i++)
             {
-                if(enemiesList[i].GetComponent<EnemyController>().isChasing())
+                if(enemiesList[i].GetComponent<EnemyController>().IsChasing())
                 {
                     fear++;
+
+                    Debug.Log("Setting heartbeat with Fear of " + fear);
                     SetHeartbeat(fear);
                 }
             }
@@ -290,10 +308,11 @@ public class PlayerController : MonoBehaviour
     void SetHeartbeat(int fear)
     {
         //Checking for change in fear
-        if (fear > currentFear || fear < currentFear)
+        if (fear > currentFear)
         {
             //Updating current fear
-            currentFear = fear;
+            currentFear++;
+            Debug.Log(currentFear);
             Heartbeat(currentFear);
         }
     }

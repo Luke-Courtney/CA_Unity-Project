@@ -81,7 +81,7 @@ public class EnemyController : MonoBehaviour
     }
 
     //Is the enemy chasing the player
-    public bool isChasing()
+    public bool IsChasing()
     {
         return chasing;
     }

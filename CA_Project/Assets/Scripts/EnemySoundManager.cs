@@ -29,7 +29,7 @@ public class EnemySoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(controller.isChasing())
+        if(controller.IsChasing())
         {
             isChasing = true;
             source.pitch = chasePitch;

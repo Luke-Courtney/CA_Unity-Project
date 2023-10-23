@@ -25,6 +25,7 @@ public class FollowPlayer : MonoBehaviour
     void fearZoom()
     {
         int zoom = GameObject.Find("Player").GetComponent<PlayerController>().getFear();
+        zoom = zoom * 2;
         if(zoom > 15)
         {
             zoom = 15;
