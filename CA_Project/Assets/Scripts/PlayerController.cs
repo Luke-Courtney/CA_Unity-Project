@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
     //Fear level
     private int fear = 0;
 
+    //Attacks
+    private float lastLightPulse = 0;
+    private float lightPulseInterval = 15.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
         {
             movement();
             faceMouse();
+            attack();
 
             // Increment the hit timer
             hitTimer += Time.deltaTime;
@@ -242,6 +247,22 @@ public class PlayerController : MonoBehaviour
 
             //Turning off battery pickup after use
             Destroy(other.gameObject);
+        }
+    }
+
+    void attack()
+    {
+        //Lightpulse
+        if(Input.GetMouseButton(0) && lastLightPulse > lightPulseInterval)
+        {
+            //Attack
+            lastLightPulse = 0;
+            gameObject.GetComponent<FlashlightDamage>().lightPulse();
+        }
+        else
+        {
+            //Continue counting time since last attack
+            lastLightPulse += Time.deltaTime;
         }
     }
 }
