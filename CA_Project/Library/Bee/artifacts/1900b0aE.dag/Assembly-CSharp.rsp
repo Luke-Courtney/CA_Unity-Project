@@ -358,7 +358,6 @@
 "Assets/Scripts/FollowPlayer.cs"
 "Assets/Scripts/MenuSelection.cs"
 "Assets/Scripts/PlayerController.cs"
-"Assets/Scripts/Scene_Manager.cs"
 "Assets/Scripts/WaveManager.cs"
 -langversion:9.0
 
