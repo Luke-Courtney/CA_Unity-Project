@@ -82,10 +82,9 @@ public class MenuSelection : MonoBehaviour
         {
             selectSource.PlayOneShot(enterSound, 0.7f);
 
-            while(elapsedTime < 100.0f)
+            while(elapsedTime < 75.0f)
             {
                 elapsedTime += Time.deltaTime;
-                Debug.Log("Elapsed:" + elapsedTime.ToString());
             }
 
             elapsedTime = 0.0f;

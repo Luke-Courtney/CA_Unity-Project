@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -86,7 +87,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(alive)
+        utilityInput();
+
+        if (alive)
         {
             movement();
             faceMouse();
@@ -107,6 +110,14 @@ public class PlayerController : MonoBehaviour
     {   
         //Late updating fear value to 0 so that the camera zoom script has time to read in the fear value from getFear()
         fear = 0;
+    }
+
+    void utilityInput()
+    { 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Menu");
+        }
     }
 
     void movement()
