@@ -31,6 +31,23 @@ public class PlayerController : MonoBehaviour
     //Fear level
     private int fear = 0;
 
+    //Attacks
+    private float lastLightPulse = 0;
+    private float lightPulseInterval = 15.0f;
+
+    //Audio
+    private AudioSource audioSource;
+
+    //Heartbeats
+    private int heartbeatLevel = 1;
+    public AudioClip heartbeat_1;
+    public AudioClip heartbeat_2;
+    public AudioClip heartbeat_3;
+    public AudioClip heartbeat_4;
+    public AudioClip heartbeat_5;
+
+    private int currentFear = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +72,16 @@ public class PlayerController : MonoBehaviour
         {
             enemiesList.Add(enemiesArray[i]);
         }
+
+        //Getting Audio Source component
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.Stop();
+        audioSource.clip = heartbeat_1;
+        audioSource.Play();
     }
+
+    int i = 1;
 
     // Update is called once per frame
     void Update()
@@ -64,6 +90,7 @@ public class PlayerController : MonoBehaviour
         {
             movement();
             faceMouse();
+            attack();
 
             // Increment the hit timer
             hitTimer += Time.deltaTime;
@@ -127,13 +154,25 @@ public class PlayerController : MonoBehaviour
     //Loops through list and deletes null objects
     void updateEnemyList()
     {
-        for(int i=0; i<enemiesList.Count; i++)
+        //Finding all enemies in scene with array
+        enemiesArray = GameObject.FindGameObjectsWithTag("Enemy");
+
+        //Clearing list
+        enemiesList.Clear();
+
+        //Add all enemies from array to list
+        for (int i = 0; i < enemiesArray.Length; i++)
+        {
+            enemiesList.Add(enemiesArray[i]);
+        }
+
+        for (int i=0; i<enemiesList.Count; i++)
+        {
+            if(enemiesList[i] == null)
             {
-                if(enemiesList[i] == null)
-                {
-                    enemiesList.RemoveAt(i);
-                }
+                enemiesList.RemoveAt(i);
             }
+        }
     }
 
     //Determines how many enemies are chasing
@@ -143,12 +182,17 @@ public class PlayerController : MonoBehaviour
 
         //Looping through list of all enemies
         if(enemiesList.Count != 0)
-        { 
+        {
+
+            Debug.Log("At least 1 enemy");
             for(int i=0; i<enemiesList.Count; i++)
             {
-                if(enemiesList[i].GetComponent<EnemyController>().isChasing())
+                if(enemiesList[i].GetComponent<EnemyController>().IsChasing())
                 {
                     fear++;
+
+                    Debug.Log("Setting heartbeat with Fear of " + fear);
+                    SetHeartbeat(fear);
                 }
             }
         }
@@ -242,6 +286,82 @@ public class PlayerController : MonoBehaviour
 
             //Turning off battery pickup after use
             Destroy(other.gameObject);
+        }
+    }
+
+    void attack()
+    {
+        //Lightpulse
+        if(Input.GetMouseButton(0) && lastLightPulse > lightPulseInterval)
+        {
+            //Attack
+            lastLightPulse = 0;
+            gameObject.GetComponent<FlashlightDamage>().lightPulse();
+        }
+        else
+        {
+            //Continue counting time since last attack
+            lastLightPulse += Time.deltaTime;
+        }
+    }
+
+    void SetHeartbeat(int fear)
+    {
+        //Checking for change in fear
+        if (fear > currentFear)
+        {
+            //Updating current fear
+            currentFear++;
+            Debug.Log(currentFear);
+            Heartbeat(currentFear);
+        }
+    }
+
+    void Heartbeat(int level)
+    {
+       
+        switch (level)
+        {
+            case 0:
+                Debug.Log("Case 0");
+                audioSource.Stop();
+                break;
+
+            case 1:
+                Debug.Log("Case 1");
+                audioSource.Stop();
+                audioSource.clip = heartbeat_1;
+                audioSource.Play();
+                break;
+
+            case 2:
+                Debug.Log("Case 2");
+                audioSource.Stop();
+                audioSource.clip = heartbeat_2;
+                audioSource.Play();
+                break;
+
+            case 3:
+                audioSource.Stop();
+                audioSource.clip = heartbeat_3;
+                audioSource.Play();
+                break;
+
+            case 4:
+                audioSource.Stop();
+                audioSource.clip = heartbeat_4;
+                audioSource.Play();
+                break;
+
+            case 5:
+                audioSource.Stop();
+                audioSource.clip = heartbeat_5;
+                audioSource.Play();
+                break;
+
+            default:
+                Debug.LogWarning("Invalid Heartbeat Level");
+                break;
         }
     }
 }
