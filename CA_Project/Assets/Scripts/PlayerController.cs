@@ -32,10 +32,6 @@ public class PlayerController : MonoBehaviour
     //Fear level
     private int fear = 0;
 
-    //Attacks
-    private float lastLightPulse = 0;
-    private float lightPulseInterval = 15.0f;
-
     //Audio
     private AudioSource audioSource;
 
@@ -114,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     void utilityInput()
     { 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape  ))
         {
             SceneManager.LoadScene("Menu");
         }
@@ -194,15 +190,11 @@ public class PlayerController : MonoBehaviour
         //Looping through list of all enemies
         if(enemiesList.Count != 0)
         {
-
-            Debug.Log("At least 1 enemy");
             for(int i=0; i<enemiesList.Count; i++)
             {
                 if(enemiesList[i].GetComponent<EnemyController>().IsChasing())
                 {
                     fear++;
-
-                    Debug.Log("Setting heartbeat with Fear of " + fear);
                     SetHeartbeat(fear);
                 }
             }
@@ -302,18 +294,7 @@ public class PlayerController : MonoBehaviour
 
     void attack()
     {
-        //Lightpulse
-        if(Input.GetMouseButton(0) && lastLightPulse > lightPulseInterval)
-        {
-            //Attack
-            lastLightPulse = 0;
-            gameObject.GetComponent<FlashlightDamage>().lightPulse();
-        }
-        else
-        {
-            //Continue counting time since last attack
-            lastLightPulse += Time.deltaTime;
-        }
+        
     }
 
     void SetHeartbeat(int fear)

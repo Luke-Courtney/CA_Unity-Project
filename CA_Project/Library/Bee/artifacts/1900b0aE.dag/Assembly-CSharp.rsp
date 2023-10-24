@@ -356,6 +356,7 @@
 "Assets/Scripts/EnemySoundManager.cs"
 "Assets/Scripts/FlashlightDamage.cs"
 "Assets/Scripts/FollowPlayer.cs"
+"Assets/Scripts/LightPulse.cs"
 "Assets/Scripts/MenuSelection.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/WaveManager.cs"
