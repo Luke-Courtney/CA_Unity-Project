@@ -11,6 +11,9 @@ public class LightPulse : MonoBehaviour
 
     private float indicatorIntensity;
 
+    private AudioSource audioSource;
+    public AudioClip pulseSound;
+
     //Has the ability been unlocked?
     //Public for testing
     public bool collected = false;
@@ -20,6 +23,9 @@ public class LightPulse : MonoBehaviour
     {
         indicator = GameObject.Find("LightPulse Indicator").GetComponent<Light>();
         lastLightPulse = 15;
+
+        //Getting Audio Source component
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +42,7 @@ public class LightPulse : MonoBehaviour
                 lastLightPulse = 0;
                 indicatorIntensity = 0;
                 gameObject.GetComponent<FlashlightDamage>().lightPulse();
+                audioSource.PlayOneShot(pulseSound, 0.7f);
             }
             else
             {
@@ -57,5 +64,10 @@ public class LightPulse : MonoBehaviour
     {
             if (indicatorIntensity < 5) { indicatorIntensity = lastLightPulse / 3; }
             indicator.intensity = indicatorIntensity;
+    }
+
+    public void Collected(bool isCollected)
+    {
+        collected = isCollected;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,6 +46,9 @@ public class PlayerController : MonoBehaviour
 
     private int currentFear = 0;
 
+    //StatTracker
+    private StatTracker stats;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +80,9 @@ public class PlayerController : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = heartbeat_1;
         audioSource.Play();
+
+        //StatTracker
+        stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
     }
 
     int i = 1;
@@ -89,7 +96,6 @@ public class PlayerController : MonoBehaviour
         {
             movement();
             faceMouse();
-            attack();
 
             // Increment the hit timer
             hitTimer += Time.deltaTime;
@@ -100,6 +106,11 @@ public class PlayerController : MonoBehaviour
         }
     
         fearLevel();
+
+        if(Input.GetMouseButtonDown(2))
+        {
+            stats.testStats();
+        }
     }
 
     void LateUpdate()
@@ -278,6 +289,8 @@ public class PlayerController : MonoBehaviour
 
                 //Turning off health pickup after use
                 Destroy(other.gameObject);
+
+                stats.AddHealthpack();
             }
         }
 
@@ -289,12 +302,9 @@ public class PlayerController : MonoBehaviour
 
             //Turning off battery pickup after use
             Destroy(other.gameObject);
-        }
-    }
 
-    void attack()
-    {
-        
+            stats.AddBattery();
+        }
     }
 
     void SetHeartbeat(int fear)
@@ -304,7 +314,6 @@ public class PlayerController : MonoBehaviour
         {
             //Updating current fear
             currentFear++;
-            Debug.Log(currentFear);
             Heartbeat(currentFear);
         }
     }
@@ -315,19 +324,16 @@ public class PlayerController : MonoBehaviour
         switch (level)
         {
             case 0:
-                Debug.Log("Case 0");
                 audioSource.Stop();
                 break;
 
             case 1:
-                Debug.Log("Case 1");
                 audioSource.Stop();
                 audioSource.clip = heartbeat_1;
                 audioSource.Play();
                 break;
 
             case 2:
-                Debug.Log("Case 2");
                 audioSource.Stop();
                 audioSource.clip = heartbeat_2;
                 audioSource.Play();
