@@ -66,10 +66,10 @@
     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshSurface.cs" />
     <Compile Include="Assets\Scripts\FlashlightDamage.cs" />
     <Compile Include="Assets\Scripts\StatTracker.cs" />
+    <Compile Include="Assets\Scripts\UpgradeUnlocker.cs" />
     <Compile Include="Assets\Scripts\MenuSelection.cs" />
     <Compile Include="Assets\Scripts\WaveManager.cs" />
     <Compile Include="Assets\Scripts\EnemySoundManager.cs" />
-    <Compile Include="Assets\Scripts\UpgradeUnlocker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

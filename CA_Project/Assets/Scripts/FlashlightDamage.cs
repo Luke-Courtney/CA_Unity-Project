@@ -8,6 +8,7 @@ public class FlashlightDamage : MonoBehaviour
     private StatTracker stats;
 
     //Damage beam
+    private bool flashlightOn = true;
     private float flashlightDefaultIntensity = 5.0f;
     public float flashlightDamageRange = 10.0f;
     public float damage = 10.0f;
@@ -45,25 +46,30 @@ public class FlashlightDamage : MonoBehaviour
     {
         DamageBeam();
         DepleteBattery();
+        ToggleFlashlight();
     }
 
     void DamageBeam()
     {
-        // Create a ray that starts at the position of the game object and extends forwards.
-        Ray ray = new Ray(transform.position, transform.forward);
-
-        // Perform a raycast using the ray.
-        //If enemy is hit
-        if (Physics.Raycast(ray, out RaycastHit hit, (flashlightDamageRange*(batteryLevel/100))) && hit.collider.gameObject.tag == "Enemy")
+        //If flashlight on
+        if (flashlightOn)
         {
-            EnemyController enemy = hit.collider.GetComponent<EnemyController>();
-            enemy.damage(damage, hit.distance);
+            // Create a ray that starts at the position of the game object and extends forwards.
+            Ray ray = new Ray(transform.position, transform.forward);
+
+            // Perform a raycast using the ray.
+            //If enemy is hit
+            if (Physics.Raycast(ray, out RaycastHit hit, (flashlightDamageRange * (batteryLevel / 100))) && hit.collider.gameObject.tag == "Enemy")
+            {
+                EnemyController enemy = hit.collider.GetComponent<EnemyController>();
+                enemy.damage(damage, hit.distance);
+            }
         }
     }
 
     void DepleteBattery()
     {
-        if(playerController.isAlive())
+        if(playerController.isAlive() && flashlightOn)
         {
             batteryLevel = batteryLevel - (batteryDrainRate*Time.deltaTime);
             flashlight.intensity = flashlightDefaultIntensity * (batteryLevel/100);
@@ -83,6 +89,23 @@ public class FlashlightDamage : MonoBehaviour
     public void RechargeBattery()
     {
         batteryLevel = 100;
+    }
+
+    private void ToggleFlashlight()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (flashlightOn)
+            {
+                flashlight.intensity = 0;
+                flashlightOn = false;
+            }
+            else
+            {
+                flashlight.intensity = flashlightDefaultIntensity * (batteryLevel / 100);
+                flashlightOn = true;
+            }
+        }
     }
 
     //Light pulse
