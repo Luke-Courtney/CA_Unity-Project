@@ -360,6 +360,7 @@
 "Assets/Scripts/MenuSelection.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/StatTracker.cs"
+"Assets/Scripts/StatWriter.cs"
 "Assets/Scripts/UpgradeUnlocker.cs"
 "Assets/Scripts/WaveManager.cs"
 -langversion:9.0

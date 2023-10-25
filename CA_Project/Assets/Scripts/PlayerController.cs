@@ -233,14 +233,20 @@ public class PlayerController : MonoBehaviour
                 case 2:
                     lifeLight3.intensity = 0;
                     break;
+
                 case 1:
                     lifeLight2.intensity = 0;
                     break;
+
                 case 0:
                     lifeLight1.intensity = 0;
                     flashlight.intensity = 0;
                     alive = false;
+                    stats.AddDeath();
                     Debug.Log("You are dead");
+
+                    //Write stats
+                    stats.LogStats();
                     break;
             }
         }
