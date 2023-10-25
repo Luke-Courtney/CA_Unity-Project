@@ -21,12 +21,17 @@ public class EnemyController : MonoBehaviour
     float wanderRange = 15.0f; 
     Vector3 wanderPoint = new Vector3(999,999,999);
 
+    //StatTracker
+    private StatTracker stats;
+
     void Start()
     {
         player = GameObject.Find("Player");
         eyeLight = GameObject.Find("EyeLight").GetComponent<Light>();
         chasing = false;
         eyes();
+
+        stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
     }
 
     void Update()
@@ -86,6 +91,11 @@ public class EnemyController : MonoBehaviour
         return chasing;
     }
 
+    public float getHealth()
+    {
+        return health;
+    }
+
     //Damage Enemy
     public void damage(float damage, float range)
     {
@@ -94,6 +104,7 @@ public class EnemyController : MonoBehaviour
         if(health<=1)
         {
             Destroy(gameObject);
+            stats.AddKill();
         }
     }
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FlashlightDamage : MonoBehaviour
 {
+    //Stat tracker
+    private StatTracker stats;
+
     //Damage beam
     private float flashlightDefaultIntensity = 5.0f;
     public float flashlightDamageRange = 10.0f;
@@ -34,6 +37,7 @@ public class FlashlightDamage : MonoBehaviour
         flashlight = GameObject.Find("Flashlight").GetComponent<Light>();
         pulseLight = GameObject.Find("LightPulse Light").GetComponent<Light>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
     }
 
     // Update is called once per frame
