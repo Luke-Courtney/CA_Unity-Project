@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class StatTracker : MonoBehaviour
 {
+    //StatWriter
+    private StatWriter statWriter;
+
+    private void Start()
+    {
+        statWriter = GetComponent<StatWriter>();
+    }
+
     //Combat stats
     int kills = 0;
     int deaths = 0;
@@ -38,6 +46,11 @@ public class StatTracker : MonoBehaviour
     }
 
     //Pickups
+    //Total pickups
+    public int GetPickups()
+    {
+        return pickups;
+    }
     //Healthpacks
     public void AddHealthpack()
     {
@@ -68,5 +81,20 @@ public class StatTracker : MonoBehaviour
         Debug.Log("pickups: " + pickups);
         Debug.Log("healthPacks: " + healthPacks);
         Debug.Log("batteries: " + batteries);
+    }
+
+    //Writing stats to file
+    public void LogStats()
+    {
+        //Writing stats
+        Debug.Log("Updating stats file");
+        statWriter.UpdateStats();
+
+        //Resetting stats in-game
+        kills = 0;
+        deaths = 0;
+        pickups = 0;
+        healthPacks = 0;
+        batteries = 0;
     }
 }

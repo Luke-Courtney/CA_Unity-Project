@@ -18,6 +18,9 @@ public class LightPulse : MonoBehaviour
     //Public for testing
     public bool collected = false;
 
+    //Player
+    private PlayerController playerController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,37 +29,46 @@ public class LightPulse : MonoBehaviour
 
         //Getting Audio Source component
         audioSource = GetComponent<AudioSource>();
+
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(collected)
+        if(playerController.isAlive())
         {
-            UpdateIndicatorIntensity();
-
-            //Lightpulse
-            if (Input.GetMouseButton(0) && lastLightPulse > lightPulseInterval)
+            if (collected)
             {
-                //Attack
-                lastLightPulse = 0;
-                indicatorIntensity = 0;
-                gameObject.GetComponent<FlashlightDamage>().lightPulse();
-                audioSource.PlayOneShot(pulseSound, 0.7f);
+                UpdateIndicatorIntensity();
+
+                //Lightpulse
+                if (Input.GetMouseButton(0) && lastLightPulse > lightPulseInterval)
+                {
+                    //Attack
+                    lastLightPulse = 0;
+                    indicatorIntensity = 0;
+                    gameObject.GetComponent<FlashlightDamage>().lightPulse();
+                    audioSource.PlayOneShot(pulseSound, 0.7f);
+                }
+                else
+                {
+                    //Continue counting time since last attack
+                    lastLightPulse += Time.deltaTime;
+                }
             }
             else
             {
-                //Continue counting time since last attack
-                lastLightPulse += Time.deltaTime;
+                indicator.intensity = 0;
+                lastLightPulse = 0;
             }
         }
         else
         {
             indicator.intensity = 0;
             lastLightPulse = 0;
-
         }
-        
+
     }
 
 
