@@ -27,7 +27,7 @@ public class StatDisplay : MonoBehaviour
         scoreText = GameObject.Find("Scores").GetComponent<TextMeshPro>();
         scoreText.SetText("Kills:\t\t" + kills + "\n" +
                           "Deaths:\t" + deaths + "\n" +
-                          "Pickups:\t" + pickups + "\n" +
+                          //"Pickups:\t" + pickups + "\n" +
                           "Health:\t" + health + "\n" +
                           "Batteries:\t" + batteries + "\n");
     }
