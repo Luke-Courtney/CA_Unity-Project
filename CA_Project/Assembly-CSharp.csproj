@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\LightPulse.cs" />
+    <Compile Include="Assets\Scripts\StatWriter.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshLink.cs" />
@@ -70,7 +71,8 @@
     <Compile Include="Assets\Scripts\MenuSelection.cs" />
     <Compile Include="Assets\Scripts\WaveManager.cs" />
     <Compile Include="Assets\Scripts\EnemySoundManager.cs" />
-    <Compile Include="Assets\Scripts\StatWriter.cs" />
+    <Compile Include="Assets\Scripts\StatDisplay.cs" />
+    <Compile Include="Assets\Scripts\ReturnToMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

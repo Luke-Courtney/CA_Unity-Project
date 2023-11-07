@@ -8,6 +8,8 @@ ScriptsOnlyBuild:
     - LightPulse
     - MenuSelection
     - PlayerController
+    - ReturnToMenu
+    - StatDisplay
     - StatTracker
     - StatWriter
     - UnityEngine.AI.NavMeshModifier
@@ -42,6 +44,9 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
   serializedClasses:
     Unity.Postprocessing.Runtime:
     - UnityEngine.Rendering.PostProcessing.BoolParameter
@@ -135,39 +140,39 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2602}
     - Class: 114
-      Script: {instanceID: 2700}
+      Script: {instanceID: 2640}
     - Class: 114
-      Script: {instanceID: 3004}
+      Script: {instanceID: 2702}
     - Class: 114
-      Script: {instanceID: 3764}
+      Script: {instanceID: 3006}
     - Class: 114
-      Script: {instanceID: 3878}
+      Script: {instanceID: 3766}
     - Class: 114
-      Script: {instanceID: 4142}
+      Script: {instanceID: 3880}
     - Class: 114
-      Script: {instanceID: 4854}
+      Script: {instanceID: 4144}
     - Class: 114
-      Script: {instanceID: 4998}
+      Script: {instanceID: 4856}
     - Class: 114
-      Script: {instanceID: 5082}
+      Script: {instanceID: 5000}
     - Class: 114
-      Script: {instanceID: 5298}
+      Script: {instanceID: 5084}
     - Class: 114
-      Script: {instanceID: 5690}
+      Script: {instanceID: 5300}
     - Class: 114
-      Script: {instanceID: 6032}
+      Script: {instanceID: 5692}
     - Class: 114
-      Script: {instanceID: 6586}
+      Script: {instanceID: 6034}
     - Class: 114
-      Script: {instanceID: 7088}
+      Script: {instanceID: 6588}
     - Class: 114
-      Script: {instanceID: 7330}
+      Script: {instanceID: 7090}
     - Class: 114
-      Script: {instanceID: 7450}
+      Script: {instanceID: 7332}
     - Class: 114
-      Script: {instanceID: 7658}
+      Script: {instanceID: 7452}
     - Class: 114
-      Script: {instanceID: 23708}
+      Script: {instanceID: 7660}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -226,31 +231,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2602}
     - Class: 114
-      Script: {instanceID: 3004}
+      Script: {instanceID: 3006}
     - Class: 114
-      Script: {instanceID: 3752}
+      Script: {instanceID: 3754}
     - Class: 114
-      Script: {instanceID: 3764}
+      Script: {instanceID: 3766}
     - Class: 114
-      Script: {instanceID: 4142}
+      Script: {instanceID: 4144}
     - Class: 114
-      Script: {instanceID: 4334}
+      Script: {instanceID: 4336}
     - Class: 114
-      Script: {instanceID: 4586}
+      Script: {instanceID: 4588}
     - Class: 114
-      Script: {instanceID: 4854}
+      Script: {instanceID: 4856}
     - Class: 114
-      Script: {instanceID: 4998}
+      Script: {instanceID: 5000}
     - Class: 114
-      Script: {instanceID: 5284}
+      Script: {instanceID: 5286}
     - Class: 114
-      Script: {instanceID: 5298}
+      Script: {instanceID: 5300}
     - Class: 114
-      Script: {instanceID: 6946}
+      Script: {instanceID: 6948}
     - Class: 114
-      Script: {instanceID: 7330}
+      Script: {instanceID: 7332}
     - Class: 114
-      Script: {instanceID: 7658}
+      Script: {instanceID: 7660}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -264,6 +269,87 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 258
+      Script: {instanceID: 0}
+    Assets/Scenes/Scores.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 72
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 1928}
+    - Class: 114
+      Script: {instanceID: 2602}
+    - Class: 114
+      Script: {instanceID: 2826}
+    - Class: 114
+      Script: {instanceID: 3006}
+    - Class: 114
+      Script: {instanceID: 3754}
+    - Class: 114
+      Script: {instanceID: 3766}
+    - Class: 114
+      Script: {instanceID: 4144}
+    - Class: 114
+      Script: {instanceID: 4856}
+    - Class: 114
+      Script: {instanceID: 5000}
+    - Class: 114
+      Script: {instanceID: 5286}
+    - Class: 114
+      Script: {instanceID: 5300}
+    - Class: 114
+      Script: {instanceID: 6300}
+    - Class: 114
+      Script: {instanceID: 7332}
+    - Class: 114
+      Script: {instanceID: 7660}
+    - Class: 114
+      Script: {instanceID: 27488}
+    - Class: 114
+      Script: {instanceID: 29186}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 135
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -386,6 +472,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
     className: PostProcessLayer
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StatWriter
   - hash:
       serializedVersion: 2
       Hash: 10fc177f3ef7af4a75e973fb2d78d57a
@@ -1231,9 +1323,16 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: StatWriter
+    className: StatDisplay
+  - hash:
+      serializedVersion: 2
+      Hash: b3e357d7fdf895b71adf49b57b795984
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ReturnToMenu
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Game.unity
+  - Assets/Scenes/Scores.unity
   playerPath: C:/Users/lukec/CA_Unity-Project/Build/CA_Project.exe
