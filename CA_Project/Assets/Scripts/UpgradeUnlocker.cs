@@ -11,6 +11,10 @@ public class UpgradeUnlocker : MonoBehaviour
     private bool hasLightPulse;
     private int pulseUnlockNum = 5;
 
+    //Ping
+    private bool hasPing;
+    private int pingUnlockNum = 10;
+
     //Audio
     private AudioSource audioSource;
     public AudioClip unlockSound;
@@ -30,6 +34,7 @@ public class UpgradeUnlocker : MonoBehaviour
         CheckUnlocks();
     }
 
+    //Checks if the player has met the required number of kills to unlock each ability
     private void CheckUnlocks()
     {
         if(!hasLightPulse) 
@@ -38,6 +43,16 @@ public class UpgradeUnlocker : MonoBehaviour
             {
                 hasLightPulse = true;
                 GameObject.Find("Player").GetComponent<LightPulse>().Collected(hasLightPulse);
+                audioSource.PlayOneShot(unlockSound, 0.7f);
+            }
+        }
+
+        if (!hasPing)
+        {
+            if (stats.GetKills() >= pingUnlockNum)
+            {
+                hasPing = true;
+                GameObject.Find("Player").GetComponent<PingAbility>().Collected(hasPing);
                 audioSource.PlayOneShot(unlockSound, 0.7f);
             }
         }
