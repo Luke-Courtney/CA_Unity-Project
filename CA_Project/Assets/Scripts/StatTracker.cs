@@ -21,11 +21,26 @@ public class StatTracker : MonoBehaviour
     int healthPacks = 0;
     int batteries = 0;
 
+    //Score (Kills, but only from current round)
+    int score = 0;
+
+
+    //Score
+    public void AddScore()
+    {
+        score++;
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
   
     //Combat
     //Flashlight kills
     public void AddKill()
     {
+        AddScore();
         PlayerPrefs.SetInt("kills", (PlayerPrefs.GetInt("kills") + 1));
     }
 

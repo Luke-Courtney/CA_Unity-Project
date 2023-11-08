@@ -26,7 +26,7 @@ public class UpgradeUnlocker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
+        stats = gameObject.GetComponent<StatTracker>();
 
         //Getting Audio Source component
         audioSource = GameObject.Find("Player").GetComponent<AudioSource>();
@@ -41,9 +41,11 @@ public class UpgradeUnlocker : MonoBehaviour
     //Checks if the player has met the required number of kills to unlock each ability
     private void CheckUnlocks()
     {
-        if(!hasLightPulse) 
+        int score = stats.GetScore();
+
+        if (!hasLightPulse) 
         {
-            if(stats.GetKills() >= pulseUnlockNum)
+            if(score >= pulseUnlockNum)
             {
                 hasLightPulse = true;
                 GameObject.Find("Player").GetComponent<LightPulse>().Collected(hasLightPulse);
@@ -53,7 +55,7 @@ public class UpgradeUnlocker : MonoBehaviour
 
         if (!hasPing)
         {
-            if (stats.GetKills() >= pingUnlockNum)
+            if (score >= pingUnlockNum)
             {
                 hasPing = true;
                 GameObject.Find("Player").GetComponent<PingAbility>().Collected(hasPing);
@@ -63,7 +65,7 @@ public class UpgradeUnlocker : MonoBehaviour
 
         if (!hasMovement)
         {
-            if (stats.GetKills() >= movementUnlockNum)
+            if (score >= movementUnlockNum)
             {
                 hasMovement = true;
                 GameObject.Find("Player").GetComponent<MovementAbility>().Collected(hasMovement);

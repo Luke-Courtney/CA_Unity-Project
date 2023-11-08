@@ -13,7 +13,6 @@ ScriptsOnlyBuild:
     - ReturnToMenu
     - StatDisplay
     - StatTracker
-    - StatWriter
     - UnityEngine.AI.NavMeshModifier
     - UnityEngine.AI.NavMeshSurface
     - UpgradeUnlocker
@@ -145,8 +144,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2584}
     - Class: 114
       Script: {instanceID: 2606}
-    - Class: 114
-      Script: {instanceID: 2644}
     - Class: 114
       Script: {instanceID: 2706}
     - Class: 114
