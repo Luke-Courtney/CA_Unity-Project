@@ -9,11 +9,15 @@ public class UpgradeUnlocker : MonoBehaviour
 
     //Light Pulse
     private bool hasLightPulse;
-    private int pulseUnlockNum = 5;
+    private int pulseUnlockNum = 10;
 
     //Ping
     private bool hasPing;
-    private int pingUnlockNum = 10;
+    private int pingUnlockNum = 20;
+
+    //Movement
+    private bool hasMovement;
+    private int movementUnlockNum = 5;
 
     //Audio
     private AudioSource audioSource;
@@ -53,6 +57,16 @@ public class UpgradeUnlocker : MonoBehaviour
             {
                 hasPing = true;
                 GameObject.Find("Player").GetComponent<PingAbility>().Collected(hasPing);
+                audioSource.PlayOneShot(unlockSound, 0.7f);
+            }
+        }
+
+        if (!hasMovement)
+        {
+            if (stats.GetKills() >= movementUnlockNum)
+            {
+                hasMovement = true;
+                GameObject.Find("Player").GetComponent<MovementAbility>().Collected(hasMovement);
                 audioSource.PlayOneShot(unlockSound, 0.7f);
             }
         }

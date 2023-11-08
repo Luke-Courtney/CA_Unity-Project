@@ -134,8 +134,9 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
 
         //Move the player
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput ,Space.World);
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput ,Space.World);
+        transform.Translate(forwardInput * speed * Time.deltaTime * Vector3.forward ,Space.World);
+        transform.Translate(horizontalInput * speed * Time.deltaTime * Vector3.right ,Space.World);
+
 
         //Keeps max speed in check
         if(GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
