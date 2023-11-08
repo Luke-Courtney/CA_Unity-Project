@@ -9,12 +9,11 @@ public class StatDisplay : MonoBehaviour
     private string path = "Assets/Stats/stats.txt";
 
     //File content list
-    private string[] content = new string[5];
-    private string kills;
-    private string deaths;
-    private string pickups;
-    private string health;
-    private string batteries;
+    private string killsNum;
+    private string deathsNum;
+    private string pickupsNum;
+    private string healthNum;
+    private string batteriesNum;
 
     //Text object
     private TextMeshPro scoreText;
@@ -22,36 +21,32 @@ public class StatDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ReadFile();
+        ReadStats();
 
         scoreText = GameObject.Find("Scores").GetComponent<TextMeshPro>();
-        scoreText.SetText("Kills:\t\t" + kills + "\n" +
-                          "Deaths:\t" + deaths + "\n" +
-                          //"Pickups:\t" + pickups + "\n" +
-                          "Health:\t" + health + "\n" +
-                          "Batteries:\t" + batteries + "\n");
+        scoreText.SetText("Kills:\t\t" + killsNum + "\n" +
+                          "Deaths:\t" + deathsNum + "\n" +
+                          //"Pickups:\t" + pickupsNum + "\n" +
+                          "Health:\t" + healthNum + "\n" +
+                          "Batteries:\t" + batteriesNum + "\n");
     }
 
     //Read the stat file
-    void ReadFile()
+    void ReadStats()
     {
-        //Reader
-        StreamReader reader = new StreamReader(path);
+        Debug.Log("Reading stats for StatDisplay");
 
-        //Read each line one by one
-        int line = 0;
-        while (!reader.EndOfStream)
-        {
-            content[line] = reader.ReadLine();
-            line++;
-        }
+        //Reads playerprefs for stats
+        if (PlayerPrefs.HasKey("kills")) { killsNum = PlayerPrefs.GetInt("kills").ToString(); }
+        if (PlayerPrefs.HasKey("deaths")) { deathsNum = (PlayerPrefs.GetInt("deaths")).ToString(); }
+        if (PlayerPrefs.HasKey("pickups")) { pickupsNum = (PlayerPrefs.GetInt("pickups")).ToString(); }
+        if (PlayerPrefs.HasKey("health")) { healthNum = (PlayerPrefs.GetInt("health")).ToString(); }
+        if (PlayerPrefs.HasKey("batteries")) { batteriesNum = (PlayerPrefs.GetInt("batteries")).ToString(); }
 
-        reader.Close();
-
-        kills = content[0];
-        deaths = content[1];
-        pickups = content[2];
-        health = content[3];
-        batteries = content[4];
+        Debug.Log(killsNum);
+        Debug.Log(deathsNum);
+        Debug.Log(pickupsNum);
+        Debug.Log(healthNum);
+        Debug.Log(batteriesNum);
     }
 }

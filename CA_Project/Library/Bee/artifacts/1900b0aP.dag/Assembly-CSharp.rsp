@@ -313,6 +313,8 @@
 "Assets/Scripts/FollowPlayer.cs"
 "Assets/Scripts/LightPulse.cs"
 "Assets/Scripts/MenuSelection.cs"
+"Assets/Scripts/MovementAbility.cs"
+"Assets/Scripts/PingAbility.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/ReturnToMenu.cs"
 "Assets/Scripts/StatDisplay.cs"

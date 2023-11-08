@@ -8,10 +8,13 @@ using UnityEngine;
 public class StatWriter : MonoBehaviour
 {
     private StatTracker stats;
-    private string path = "Assets/Stats/stats.txt";
 
     //File content list
-    private string[] content = new string[5];
+    private int killsNum;
+    private int deathsNum;
+    private int pickupsNum;
+    private int healthNum;
+    private int batteriesNum;
 
     // Start is called before the first frame update
     void Start()
@@ -22,74 +25,75 @@ public class StatWriter : MonoBehaviour
 
     public void UpdateStats()
     {
-        ReadFile();
-        WriteToFile();
+        ReadStats();
+        WriteStats();
     }
 
-    void ReadFile()
+    //Reads playerprefs for stats and sets variable values accordingly
+    void ReadStats()
     {
-        //Reader
-        StreamReader reader = new StreamReader(path);
+        if (PlayerPrefs.HasKey("kills")) { killsNum = PlayerPrefs.GetInt("kills");}
+        else { PlayerPrefs.SetInt("kills", 0); }
 
-        //Read each line one by one
-        int line = 0;
-        while (!reader.EndOfStream)
-        {
-            content[line] = reader.ReadLine();
-            line++;
-        }
+        if (PlayerPrefs.HasKey("deaths")) { deathsNum = PlayerPrefs.GetInt("deaths"); }
+        else { PlayerPrefs.SetInt("deaths", 0); }
 
-        reader.Close();
+        if (PlayerPrefs.HasKey("pickups")) { pickupsNum = PlayerPrefs.GetInt("pickups"); }
+        else { PlayerPrefs.SetInt("pickups", 0); }
+
+        if (PlayerPrefs.HasKey("health")) { healthNum = PlayerPrefs.GetInt("health"); }
+        else { PlayerPrefs.SetInt("health", 0); }
+
+        if (PlayerPrefs.HasKey("batteries")) { batteriesNum = PlayerPrefs.GetInt("batteries"); }
+        else { PlayerPrefs.SetInt("batteries", 0); }
+
+        Debug.Log("Playerprefs:");
+        Debug.Log(PlayerPrefs.GetInt("kills"));
+        Debug.Log(PlayerPrefs.GetInt("deaths"));
+        Debug.Log(PlayerPrefs.GetInt("health"));
     }
 
-    void WriteToFile()
+    //Update and save stats
+    void WriteStats()
     {
-        StreamWriter writer = new StreamWriter(path, false);
-
-        //Stat values
-        int kills, deaths, pickups, healthpacks, batteries = 0;
-
-        if (content[0] != null)
+        //kills
+        if(PlayerPrefs.HasKey("kills"))
         {
-            string killsString = content[0];
-            kills = int.Parse(killsString) + stats.GetKills();
+            PlayerPrefs.SetInt("kills", (killsNum + PlayerPrefs.GetInt("kills")));
         }
-        else { kills = 0; }
 
-        if (content[1] != null)
+        //Deaths
+        if (PlayerPrefs.HasKey("deaths"))
         {
-            string deathsString = content[1];
-            deaths = int.Parse(deathsString) + stats.GetDeaths();
+            PlayerPrefs.SetInt("deaths", (deathsNum + PlayerPrefs.GetInt("deaths")));
         }
-        else { deaths = 0; }
 
-        if (content[2] != null)
+        //pickups
+        if (PlayerPrefs.HasKey("pickups"))
         {
-            string pickupsString = content[2];
-            pickups = int.Parse(pickupsString) + stats.GetPickups();
+            PlayerPrefs.SetInt("pickups", (pickupsNum + PlayerPrefs.GetInt("pickups")));
         }
-        else { pickups = 0; }
 
-        if (content[3] != null)
+        //health
+        if (PlayerPrefs.HasKey("health"))
         {
-            string healthpacksString = content[3];
-            healthpacks = int.Parse(healthpacksString) + stats.GetHealthpacks();
+            PlayerPrefs.SetInt("health", (healthNum + PlayerPrefs.GetInt("health")));
         }
-        else { healthpacks = 0; }
 
-        if (content[4] != null)
+        //batteries
+        if (PlayerPrefs.HasKey("batteries"))
         {
-            string batteriesString = content[4];
-            batteries = int.Parse(batteriesString) + stats.GetBatteries();
+            PlayerPrefs.SetInt("batteries", (batteriesNum + PlayerPrefs.GetInt("batteries")));
         }
-        else {  batteries = 0; }
 
-        writer.WriteLine(kills);         //Kills
-        writer.WriteLine(deaths);        //Deaths
-        writer.WriteLine(pickups);       //Pickups
-        writer.WriteLine(healthpacks);   //Healthpacks
-        writer.WriteLine(batteries);     //Batteries
+        //Save stat changes
+        PlayerPrefs.Save();
 
-        writer.Close();
+        Debug.Log("StatWriter:");
+        Debug.Log(killsNum);
+        Debug.Log(deathsNum);
+        Debug.Log(pickupsNum);
+        Debug.Log(healthNum);
+        Debug.Log(batteriesNum);
     }
 }
