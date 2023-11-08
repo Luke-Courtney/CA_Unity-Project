@@ -85,8 +85,6 @@ public class PlayerController : MonoBehaviour
         stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
     }
 
-    int i = 1;
-
     // Update is called once per frame
     void Update()
     {
@@ -106,11 +104,6 @@ public class PlayerController : MonoBehaviour
         }
     
         fearLevel();
-
-        if(Input.GetMouseButtonDown(2))
-        {
-            stats.testStats();
-        }
     }
 
     void LateUpdate()
@@ -246,8 +239,8 @@ public class PlayerController : MonoBehaviour
                     stats.AddDeath();
                     Debug.Log("You are dead");
 
-                    //Write stats
-                    stats.LogStats();
+                    //Save stats
+                    stats.SaveStats();
                     break;
             }
         }

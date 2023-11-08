@@ -9,12 +9,11 @@ public class StatDisplay : MonoBehaviour
     private string path = "Assets/Stats/stats.txt";
 
     //File content list
-    private string[] content = new string[5];
-    private string kills;
-    private string deaths;
-    private string pickups;
-    private string health;
-    private string batteries;
+    private string killsNum;
+    private string deathsNum;
+    private string pickupsNum;
+    private string healthNum;
+    private string batteriesNum;
 
     //Text object
     private TextMeshPro scoreText;
@@ -22,36 +21,24 @@ public class StatDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ReadFile();
+        ReadStats();
 
+        //Setting the text
         scoreText = GameObject.Find("Scores").GetComponent<TextMeshPro>();
-        scoreText.SetText("Kills:\t\t" + kills + "\n" +
-                          "Deaths:\t" + deaths + "\n" +
-                          //"Pickups:\t" + pickups + "\n" +
-                          "Health:\t" + health + "\n" +
-                          "Batteries:\t" + batteries + "\n");
+        scoreText.SetText("Kills:\t\t" + killsNum + "\n" +
+                          "Deaths:\t" + deathsNum + "\n" +
+                          //"Pickups:\t" + pickupsNum + "\n" +
+                          "Health:\t" + healthNum + "\n" +
+                          "Batteries:\t" + batteriesNum + "\n");
     }
 
     //Read the stat file
-    void ReadFile()
+    void ReadStats()
     {
-        //Reader
-        StreamReader reader = new StreamReader(path);
-
-        //Read each line one by one
-        int line = 0;
-        while (!reader.EndOfStream)
-        {
-            content[line] = reader.ReadLine();
-            line++;
-        }
-
-        reader.Close();
-
-        kills = content[0];
-        deaths = content[1];
-        pickups = content[2];
-        health = content[3];
-        batteries = content[4];
+        killsNum = PlayerPrefs.GetInt("kills", 0).ToString();
+        deathsNum = PlayerPrefs.GetInt("deaths", 0).ToString();
+        pickupsNum = PlayerPrefs.GetInt("pickups", 0).ToString();
+        healthNum = PlayerPrefs.GetInt("health", 0).ToString();
+        batteriesNum = PlayerPrefs.GetInt("batteries", 0).ToString();
     }
 }
