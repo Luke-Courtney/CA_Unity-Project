@@ -26,75 +26,71 @@ public class StatTracker : MonoBehaviour
     //Flashlight kills
     public void AddKill()
     {
-        kills++;
+        PlayerPrefs.SetInt("kills", (PlayerPrefs.GetInt("kills") + 1));
     }
 
     public int GetKills()
     {
-       return kills;
+       return PlayerPrefs.GetInt("kills",0);
     }
 
     //Deaths
     public void AddDeath()
     {
-        deaths++;
+        PlayerPrefs.SetInt("death", (PlayerPrefs.GetInt("death") + 1));
     }
 
     public int GetDeaths()
     {
-        return deaths;
+        return PlayerPrefs.GetInt("death",0);
     }
 
     //Pickups
     //Total pickups
+    public void SetPickups()
+    {
+        PlayerPrefs.SetInt("pickups", (PlayerPrefs.GetInt("health") + PlayerPrefs.GetInt("batteries")));
+    }
+
     public int GetPickups()
     {
-        return pickups;
+        return PlayerPrefs.GetInt("pickups",0);
     }
     //Healthpacks
     public void AddHealthpack()
     {
-        healthPacks++;
+        PlayerPrefs.SetInt("health", (PlayerPrefs.GetInt("health") + 1));
     }
 
     public int GetHealthpacks()
     {
-        return healthPacks;
+        return PlayerPrefs.GetInt("health", 0);
     }
 
     //Batteries
     public void AddBattery()
     {
-        batteries++;
+        PlayerPrefs.SetInt("batteries", (PlayerPrefs.GetInt("batteries") + 1)); ;
     }
 
     public int GetBatteries()
     {
-        return batteries;
+        return PlayerPrefs.GetInt("batteries",0);
+    }
+
+    //Save stats
+    public void SaveStats()
+    {
+        PlayerPrefs.Save();
     }
 
     public void testStats()
     {
         Debug.Log("\n\n");
-        Debug.Log("kills: " + kills);
-        Debug.Log("deaths: " + deaths);
-        Debug.Log("pickups: " + pickups);
-        Debug.Log("healthPacks: " + healthPacks);
-        Debug.Log("batteries: " + batteries);
-    }
-
-    //Writing stats to file
-    public void LogStats()
-    {
-        //Writing stats
-        Debug.Log("Updating stats file");
-        statWriter.UpdateStats();
-
-        //Resetting stats in-game
-        kills = 0;
-        deaths = 0;
-        pickups = 0;
-        healthPacks = 0;
-        batteries = 0;
+        Debug.Log("kills: " + PlayerPrefs.GetInt("kills").ToString());
+        Debug.Log("deaths: " + PlayerPrefs.GetInt("deaths").ToString());
+        Debug.Log("pickups: " + PlayerPrefs.GetInt("pickups").ToString());
+        Debug.Log("healthPacks: " + PlayerPrefs.GetInt("health").ToString());
+        Debug.Log("batteries: " + PlayerPrefs.GetInt("batteries").ToString());
     }
 }

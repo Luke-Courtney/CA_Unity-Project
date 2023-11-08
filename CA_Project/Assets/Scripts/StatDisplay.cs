@@ -23,6 +23,7 @@ public class StatDisplay : MonoBehaviour
     {
         ReadStats();
 
+        //Setting the text
         scoreText = GameObject.Find("Scores").GetComponent<TextMeshPro>();
         scoreText.SetText("Kills:\t\t" + killsNum + "\n" +
                           "Deaths:\t" + deathsNum + "\n" +
@@ -34,19 +35,10 @@ public class StatDisplay : MonoBehaviour
     //Read the stat file
     void ReadStats()
     {
-        Debug.Log("Reading stats for StatDisplay");
-
-        //Reads playerprefs for stats
-        if (PlayerPrefs.HasKey("kills")) { killsNum = PlayerPrefs.GetInt("kills").ToString(); }
-        if (PlayerPrefs.HasKey("deaths")) { deathsNum = (PlayerPrefs.GetInt("deaths")).ToString(); }
-        if (PlayerPrefs.HasKey("pickups")) { pickupsNum = (PlayerPrefs.GetInt("pickups")).ToString(); }
-        if (PlayerPrefs.HasKey("health")) { healthNum = (PlayerPrefs.GetInt("health")).ToString(); }
-        if (PlayerPrefs.HasKey("batteries")) { batteriesNum = (PlayerPrefs.GetInt("batteries")).ToString(); }
-
-        Debug.Log(killsNum);
-        Debug.Log(deathsNum);
-        Debug.Log(pickupsNum);
-        Debug.Log(healthNum);
-        Debug.Log(batteriesNum);
+        killsNum = PlayerPrefs.GetInt("kills", 0).ToString();
+        deathsNum = PlayerPrefs.GetInt("deaths", 0).ToString();
+        pickupsNum = PlayerPrefs.GetInt("pickups", 0).ToString();
+        healthNum = PlayerPrefs.GetInt("health", 0).ToString();
+        batteriesNum = PlayerPrefs.GetInt("batteries", 0).ToString();
     }
 }

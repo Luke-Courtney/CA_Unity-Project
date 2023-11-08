@@ -246,8 +246,8 @@ public class PlayerController : MonoBehaviour
                     stats.AddDeath();
                     Debug.Log("You are dead");
 
-                    //Write stats
-                    stats.LogStats();
+                    //Save stats
+                    stats.SaveStats();
                     break;
             }
         }
