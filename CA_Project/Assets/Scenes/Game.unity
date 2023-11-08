@@ -2220,7 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pulseSound: {fileID: 8300000, guid: 70da7a086e3283e4faeda172ff2173cf, type: 3}
-  collected: 0
+  collected: 1
 --- !u!114 &778858715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2233,8 +2233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7b8459d466b964f8773f087195205b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pingSound: {fileID: 0}
-  collected: 0
+  pingSound: {fileID: 8300000, guid: 48f4d59984080c0499e05479bc638b5b, type: 3}
+  collected: 1
 --- !u!114 &778858716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2248,8 +2248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 50
-  moveSound: {fileID: 0}
-  collected: 0
+  moveSound: {fileID: 8300000, guid: 9e5ad1e9fc5276e4394fe1e50c08507a, type: 3}
+  collected: 1
 --- !u!1 &783754054
 GameObject:
   m_ObjectHideFlags: 0
