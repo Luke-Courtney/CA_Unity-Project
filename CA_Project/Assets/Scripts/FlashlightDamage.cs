@@ -20,6 +20,9 @@ public class FlashlightDamage : MonoBehaviour
     private float pulseDamage = 80.0f;
     private Light pulseLight;
 
+    //Ping light
+    private Light pingLight;
+
     //Battery
     private float batteryLevel = 100;
     private float defaultBatteryDrainRate = 0.5f;
@@ -39,6 +42,7 @@ public class FlashlightDamage : MonoBehaviour
         pulseLight = GameObject.Find("LightPulse Light").GetComponent<Light>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
+        pingLight = GameObject.Find("Ping Light").GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -69,14 +73,15 @@ public class FlashlightDamage : MonoBehaviour
 
     void DepleteBattery()
     {
-        if(playerController.isAlive() && flashlightOn)
+        if (playerController.isAlive() && flashlightOn)
         {
-            batteryLevel = batteryLevel - (batteryDrainRate*Time.deltaTime);
-            flashlight.intensity = flashlightDefaultIntensity * (batteryLevel/100);
+            batteryLevel = batteryLevel - (batteryDrainRate * Time.deltaTime);
+            flashlight.intensity = flashlightDefaultIntensity * (batteryLevel / 100);
 
             //Increasing battery drain rate
-            if(batteryDrainRate < 2.5){
-                batteryDrainRate = defaultBatteryDrainRate + ((waveManager.GetTime()/60)/2);
+            if (batteryDrainRate < 2.5)
+            {
+                batteryDrainRate = defaultBatteryDrainRate + ((waveManager.GetTime() / 60) / 2);
             }
         }
         else
@@ -118,10 +123,10 @@ public class FlashlightDamage : MonoBehaviour
         //Check if any enemies are in range
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        for(int i=0; i<enemies.Length; i++)
+        for (int i = 0; i < enemies.Length; i++)
         {
             //If enemy is close enough
-            if(Vector3.Distance(GameObject.Find("Player").transform.position, enemies[i].transform.position) < pulseRange)
+            if (Vector3.Distance(GameObject.Find("Player").transform.position, enemies[i].transform.position) < pulseRange)
             {
                 enemies[i].GetComponent<EnemyController>().damage(pulseDamage, Vector3.Distance(GameObject.Find("Player").transform.position, enemies[i].transform.position));
             }
@@ -142,7 +147,7 @@ public class FlashlightDamage : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             //Turning on light
-            if(lightOff)
+            if (lightOff)
             {
                 if (pulseLight.intensity < 5)
                 {
@@ -170,4 +175,65 @@ public class FlashlightDamage : MonoBehaviour
 
         } while (elapsedTime < runTime);
     }
+
+    //Ping
+    public void Ping()
+    {
+        //Pulse ping light
+        StartCoroutine(pingLightFlash(0.1f));
+
+        //Check if any enemies are in range
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        //Loop through all enemies
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            //Setting all currently alive enemies ping lights to an intensity of 3
+            enemies[i].transform.Find("Ping").GetComponent<Light>().intensity = 3;
+        }
+    }
+
+    //Flash lightPulse light
+    private IEnumerator pingLightFlash(float waitTime)
+    {
+        float elapsedTime = 0;
+        float runTime = 1.5f;
+
+        bool lightOff = true;
+
+        do
+        {
+            //Keeping track of time
+            elapsedTime += Time.deltaTime;
+
+            //Turning on light
+            if (lightOff)
+            {
+                if (pingLight.intensity < 5)
+                {
+                    pingLight.intensity += 1.0f;
+                }
+                else
+                {
+                    lightOff = false;
+                }
+            }
+            else
+            {
+                if (pingLight.intensity > 0)
+                {
+                    pingLight.intensity -= 2.0f;
+                }
+                else
+                {
+                    lightOff = true;
+                    yield break;
+                }
+            }
+
+            yield return new WaitForSeconds(waitTime);
+
+        } while (elapsedTime < runTime);
+    }
+
 }
