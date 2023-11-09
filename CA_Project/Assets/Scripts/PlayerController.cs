@@ -50,8 +50,6 @@ public class PlayerController : MonoBehaviour
     //StatTracker
     private StatTracker stats;
 
-    //UI
-
     // Start is called before the first frame update
     void Start()
     {
@@ -86,8 +84,6 @@ public class PlayerController : MonoBehaviour
 
         //StatTracker
         stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
-
-        //UI
     }
 
     // Update is called once per frame
