@@ -848,8 +848,8 @@ Transform:
   m_GameObject: {fileID: 396322775}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -8.26, z: -2.45}
-  m_LocalScale: {x: 100, y: 1, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 500, y: 5, z: 500}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 695916923}
   m_RootOrder: 2
@@ -2320,6 +2320,7 @@ MonoBehaviour:
   heartbeat_3: {fileID: 8300000, guid: f067c8b0d4b720840ae245a0cef8a3d7, type: 3}
   heartbeat_4: {fileID: 8300000, guid: dc48d7f900e33d740854427c8b015147, type: 3}
   heartbeat_5: {fileID: 8300000, guid: 626527c38b3d022418822e619abb7b4f, type: 3}
+  menuMusic: {fileID: 8300000, guid: c67992db24073e4428316d2d69e69379, type: 3}
 --- !u!114 &778858711
 MonoBehaviour:
   m_ObjectHideFlags: 0

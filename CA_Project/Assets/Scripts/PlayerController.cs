@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     //StatTracker
     private StatTracker stats;
 
+    //Menu music to play after death
+    public AudioClip menuMusic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -238,6 +241,11 @@ public class PlayerController : MonoBehaviour
                     flashlight.intensity = 0;
                     alive = false;
                     stats.AddDeath();
+
+                    //Playing music
+                    audioSource.Stop();
+                    audioSource.clip = menuMusic;
+                    audioSource.Play();
 
                     //Save stats
                     stats.SaveStats();

@@ -360,6 +360,7 @@
 "Assets/Scripts/LightPulse.cs"
 "Assets/Scripts/MenuSelection.cs"
 "Assets/Scripts/MovementAbility.cs"
+"Assets/Scripts/MusicManager.cs"
 "Assets/Scripts/PingAbility.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/ReturnToMenu.cs"
