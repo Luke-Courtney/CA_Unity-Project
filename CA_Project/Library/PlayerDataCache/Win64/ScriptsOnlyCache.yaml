@@ -5,9 +5,11 @@ ScriptsOnlyBuild:
     - EnemySoundManager
     - FlashlightDamage
     - FollowPlayer
+    - GUIManager
     - LightPulse
     - MenuSelection
     - MovementAbility
+    - MusicManager
     - PingAbility
     - PlayerController
     - ReturnToMenu
@@ -41,6 +43,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshPro
+    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -48,6 +51,8 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.GraphicRaycaster
   serializedClasses:
     Unity.Postprocessing.Runtime:
     - UnityEngine.Rendering.PostProcessing.BoolParameter
@@ -147,7 +152,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2706}
     - Class: 114
+      Script: {instanceID: 2830}
+    - Class: 114
       Script: {instanceID: 3010}
+    - Class: 114
+      Script: {instanceID: 3034}
     - Class: 114
       Script: {instanceID: 3770}
     - Class: 114
@@ -155,28 +164,40 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4148}
     - Class: 114
-      Script: {instanceID: 4860}
+      Script: {instanceID: 4674}
     - Class: 114
-      Script: {instanceID: 5004}
+      Script: {instanceID: 4862}
     - Class: 114
-      Script: {instanceID: 5088}
+      Script: {instanceID: 5006}
     - Class: 114
-      Script: {instanceID: 5304}
+      Script: {instanceID: 5090}
     - Class: 114
-      Script: {instanceID: 5696}
+      Script: {instanceID: 5292}
     - Class: 114
-      Script: {instanceID: 6042}
+      Script: {instanceID: 5306}
     - Class: 114
-      Script: {instanceID: 6596}
+      Script: {instanceID: 5698}
     - Class: 114
-      Script: {instanceID: 7098}
+      Script: {instanceID: 5846}
     - Class: 114
-      Script: {instanceID: 7340}
+      Script: {instanceID: 5998}
     - Class: 114
-      Script: {instanceID: 7460}
+      Script: {instanceID: 6044}
     - Class: 114
-      Script: {instanceID: 7668}
+      Script: {instanceID: 6312}
+    - Class: 114
+      Script: {instanceID: 6600}
+    - Class: 114
+      Script: {instanceID: 7102}
+    - Class: 114
+      Script: {instanceID: 7344}
+    - Class: 114
+      Script: {instanceID: 7464}
+    - Class: 114
+      Script: {instanceID: 7672}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 135
       Script: {instanceID: 0}
@@ -185,6 +206,12 @@ ScriptsOnlyBuild:
     - Class: 195
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     - Class: 238
       Script: {instanceID: 0}
@@ -246,19 +273,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4592}
     - Class: 114
-      Script: {instanceID: 4860}
+      Script: {instanceID: 4862}
     - Class: 114
-      Script: {instanceID: 5004}
+      Script: {instanceID: 5006}
     - Class: 114
-      Script: {instanceID: 5290}
+      Script: {instanceID: 5292}
     - Class: 114
-      Script: {instanceID: 5304}
+      Script: {instanceID: 5306}
     - Class: 114
-      Script: {instanceID: 6956}
+      Script: {instanceID: 6156}
     - Class: 114
-      Script: {instanceID: 7340}
+      Script: {instanceID: 6960}
     - Class: 114
-      Script: {instanceID: 7668}
+      Script: {instanceID: 7344}
+    - Class: 114
+      Script: {instanceID: 7672}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -325,23 +354,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4148}
     - Class: 114
-      Script: {instanceID: 4860}
+      Script: {instanceID: 4862}
     - Class: 114
-      Script: {instanceID: 5004}
+      Script: {instanceID: 5006}
     - Class: 114
-      Script: {instanceID: 5290}
+      Script: {instanceID: 5292}
     - Class: 114
-      Script: {instanceID: 5304}
+      Script: {instanceID: 5306}
     - Class: 114
-      Script: {instanceID: 5856}
+      Script: {instanceID: 5858}
     - Class: 114
-      Script: {instanceID: 5942}
+      Script: {instanceID: 5944}
     - Class: 114
-      Script: {instanceID: 6308}
+      Script: {instanceID: 6312}
     - Class: 114
-      Script: {instanceID: 7340}
+      Script: {instanceID: 7344}
     - Class: 114
-      Script: {instanceID: 7668}
+      Script: {instanceID: 7672}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -363,7 +392,7 @@ ScriptsOnlyBuild:
     className: PanelRaycaster
   - hash:
       serializedVersion: 2
-      Hash: c88b648565071b1105f03b60e75b0266
+      Hash: 01bdb4b35fd52e1476726dbfe8632140
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -855,6 +884,12 @@ ScriptsOnlyBuild:
     className: UnityOnCancelMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 0ecbc96d02093a58887fe6ba0cfa27d5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GUIManager
+  - hash:
+      serializedVersion: 2
       Hash: 63d7b9b64a11859f416d72ba9a3c3fec
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
@@ -1069,6 +1104,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StatTracker
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MusicManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1350,4 +1391,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Game.unity
   - Assets/Scenes/Scores.unity
-  playerPath: C:/Users/lukec/CA_Unity-Project/Build/CA_Project.exe
+  playerPath: C:/Users/Luke/CA_Unity-Project/Build/CA_Project.exe

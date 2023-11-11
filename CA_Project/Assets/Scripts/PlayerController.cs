@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -48,6 +49,9 @@ public class PlayerController : MonoBehaviour
 
     //StatTracker
     private StatTracker stats;
+
+    //Menu music to play after death
+    public AudioClip menuMusic;
 
     // Start is called before the first frame update
     void Start()
@@ -237,7 +241,11 @@ public class PlayerController : MonoBehaviour
                     flashlight.intensity = 0;
                     alive = false;
                     stats.AddDeath();
-                    Debug.Log("You are dead");
+
+                    //Playing music
+                    audioSource.Stop();
+                    audioSource.clip = menuMusic;
+                    audioSource.Play();
 
                     //Save stats
                     stats.SaveStats();
@@ -246,7 +254,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void heal()
+    void Heal()
     {
         if(lives>=0)
         {
@@ -283,7 +291,7 @@ public class PlayerController : MonoBehaviour
         if(other.GetComponent<Collider>() != null && other.GetComponent<Collider>().gameObject.CompareTag("Health"))
         {
             if(lives<3){
-                heal();
+                Heal();
                 hitTimer = 0;
                 invunerable = true; 
 

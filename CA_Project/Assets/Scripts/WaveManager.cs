@@ -14,8 +14,13 @@ public class WaveManager : MonoBehaviour
     private float spawnRangeZ = 49;
 
     private float startDelay = 5.0f;
+
+    //Enemy
     private float defaultEnemySpawnInterval = 10.0f;
     public float enemySpawnInterval = 10.0f;
+    public float minEnemySpawnInterval = 0.25f;
+
+    //Pickups
     public float healthSpawnInterval = 90.0f;
     public float batterySpawnInterval = 30.0f;
 
@@ -53,7 +58,7 @@ public class WaveManager : MonoBehaviour
         //Update enemy spawn interval based on time into game
         //Every minute into the game reduces spawn interval by 1 second
         //To a minimum of 2 seconds.
-        if(enemySpawnInterval > 1)
+        if(enemySpawnInterval > minEnemySpawnInterval)
         {
             enemySpawnInterval = defaultEnemySpawnInterval - (seconds/60);
         }
