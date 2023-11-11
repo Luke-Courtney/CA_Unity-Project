@@ -184,17 +184,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6044}
     - Class: 114
-      Script: {instanceID: 6310}
+      Script: {instanceID: 6312}
     - Class: 114
-      Script: {instanceID: 6598}
+      Script: {instanceID: 6600}
     - Class: 114
-      Script: {instanceID: 7100}
+      Script: {instanceID: 7102}
     - Class: 114
-      Script: {instanceID: 7342}
+      Script: {instanceID: 7344}
     - Class: 114
-      Script: {instanceID: 7462}
+      Script: {instanceID: 7464}
     - Class: 114
-      Script: {instanceID: 7670}
+      Script: {instanceID: 7672}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -281,13 +281,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5306}
     - Class: 114
-      Script: {instanceID: 6958}
+      Script: {instanceID: 6156}
     - Class: 114
-      Script: {instanceID: 7342}
+      Script: {instanceID: 6960}
     - Class: 114
-      Script: {instanceID: 7670}
+      Script: {instanceID: 7344}
     - Class: 114
-      Script: {instanceID: 24678}
+      Script: {instanceID: 7672}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -366,11 +366,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5944}
     - Class: 114
-      Script: {instanceID: 6310}
+      Script: {instanceID: 6312}
     - Class: 114
-      Script: {instanceID: 7342}
+      Script: {instanceID: 7344}
     - Class: 114
-      Script: {instanceID: 7670}
+      Script: {instanceID: 7672}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1107,6 +1107,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MusicManager
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnMouseUpAsButtonMessageListener
@@ -1380,15 +1386,9 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MusicManager
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Game.unity
   - Assets/Scenes/Scores.unity
-  playerPath: C:/Users/lukec/CA_Unity-Project/Build/CA_Project.exe
+  playerPath: C:/Users/Luke/CA_Unity-Project/Build/CA_Project.exe
