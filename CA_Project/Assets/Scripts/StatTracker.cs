@@ -24,13 +24,13 @@ public class StatTracker : MonoBehaviour
     //Score (Kills, but only from current round)
     int score = 0;
 
-
     //Score
     public void AddScore()
     {
         score++;
     }
 
+    //Current score amount
     public int GetScore()
     {
         return score;
@@ -41,50 +41,80 @@ public class StatTracker : MonoBehaviour
     public void AddKill()
     {
         AddScore();
+        kills++;
         PlayerPrefs.SetInt("kills", (PlayerPrefs.GetInt("kills") + 1));
     }
 
+    //Total kill amount
     public int GetKills()
     {
        return PlayerPrefs.GetInt("kills",0);
     }
 
+    //Current game kill amount
+    public int GetCurrentKills()
+    {
+       return kills;
+    }
+
     //Deaths
     public void AddDeath()
     {
-        PlayerPrefs.SetInt("death", (PlayerPrefs.GetInt("death") + 1));
+        deaths++;
+        PlayerPrefs.SetInt("deaths", (PlayerPrefs.GetInt("death") + 1));
     }
 
     public int GetDeaths()
     {
-        return PlayerPrefs.GetInt("death",0);
+        return PlayerPrefs.GetInt("deaths",0);
+    }
+
+    public int GetCurrentDeaths()
+    {
+        return deaths;
     }
 
     //Pickups
     //Total pickups
     public void SetPickups()
     {
-        PlayerPrefs.SetInt("pickups", (PlayerPrefs.GetInt("health") + PlayerPrefs.GetInt("batteries")));
+        GetPickups();
     }
 
     public int GetPickups()
     {
+        PlayerPrefs.SetInt("pickups", (PlayerPrefs.GetInt("health") + PlayerPrefs.GetInt("batteries")));
         return PlayerPrefs.GetInt("pickups",0);
     }
+
+    public int GetCurrentPickups()
+    {
+        return pickups;
+    }
+
     //Healthpacks
     public void AddHealthpack()
     {
+        healthPacks++;
         PlayerPrefs.SetInt("health", (PlayerPrefs.GetInt("health") + 1));
     }
 
+    //Total healthpack amounts
     public int GetHealthpacks()
     {
         return PlayerPrefs.GetInt("health", 0);
     }
 
+    //Current healthpack amount
+    public int GetCurrentHealthpacks()
+    {
+        return healthPacks;
+    }
+
     //Batteries
     public void AddBattery()
     {
+        batteries++;
         PlayerPrefs.SetInt("batteries", (PlayerPrefs.GetInt("batteries") + 1)); ;
     }
 
@@ -93,12 +123,20 @@ public class StatTracker : MonoBehaviour
         return PlayerPrefs.GetInt("batteries",0);
     }
 
+    //current battery amount
+    public int GetCurrentBatteries()
+    {
+        return batteries;
+    }
+
     //Save stats
     public void SaveStats()
     {
         PlayerPrefs.Save();
     }
 
+    //Test function
+    //Calls all stats
     public void testStats()
     {
         Debug.Log("\n\n");

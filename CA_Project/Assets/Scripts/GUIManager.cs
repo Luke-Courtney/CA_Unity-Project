@@ -11,10 +11,17 @@ public class GUIManager : MonoBehaviour
     //Wave Manager
     private WaveManager waveManager;
 
+    //Stats
+    private StatTracker statTracker;
+
     //Death text
     public TextMeshProUGUI deathText;
     public TextMeshProUGUI timeSurvivedText;
-    private bool deathTimeTaken;
+    public TextMeshProUGUI killsText;
+    public TextMeshProUGUI healthPackText;
+    public TextMeshProUGUI batteriesText;
+
+    private bool deathStatsTaken;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +32,16 @@ public class GUIManager : MonoBehaviour
         //WaveManager
         waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
 
+        //StatTracker
+        statTracker = GameObject.Find("StatTracker").GetComponent<StatTracker>();
+
         //Setup UI for start of game
         deathText.gameObject.SetActive(false);
         timeSurvivedText.gameObject.SetActive(false);
-        deathTimeTaken = false;
+        killsText.gameObject.SetActive(false);
+        healthPackText.gameObject.SetActive(false);
+        batteriesText.gameObject.SetActive(false);
+        deathStatsTaken = false;
     }
 
     // Update is called once per frame
@@ -53,12 +66,20 @@ public class GUIManager : MonoBehaviour
             int secondsSurvived = (int)(totalSeconds % 60);
 
             //Only update time once
-            if (!deathTimeTaken) 
+            if (!deathStatsTaken) 
             {
                 timeSurvivedText.SetText("Time Survived: " + minutesSurvived + ":" + secondsSurvived);
-                deathTimeTaken = true;
+                killsText.SetText("Kills: " + statTracker.GetCurrentKills());
+                healthPackText.SetText("Health Kits: " + statTracker.GetCurrentHealthpacks());
+                batteriesText.SetText("Batteries: " + statTracker.GetCurrentBatteries());
+
+                deathStatsTaken = true;
             }
             
+            //Set stat text active
+            killsText.gameObject.SetActive(true);
+            healthPackText.gameObject.SetActive(true);
+            batteriesText.gameObject.SetActive(true);
             timeSurvivedText.gameObject.SetActive(true);
         }
     }

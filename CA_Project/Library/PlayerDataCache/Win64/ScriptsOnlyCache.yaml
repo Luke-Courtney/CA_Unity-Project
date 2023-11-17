@@ -1262,7 +1262,7 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
-      Hash: b370c82c7f505d3fd16239eb44efca16
+      Hash: 1af612ae8d771ead297f6343c64384e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: WaveManager
