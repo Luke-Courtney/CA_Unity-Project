@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player");
         eyeLight = GameObject.Find("EyeLight").GetComponent<Light>();
         chasing = false;
-        eyes();
+        //eyes(); 
 
         stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
     }
@@ -48,34 +48,37 @@ public class EnemyController : MonoBehaviour
         //How far away is the player?
         float playerDistance = Vector3.Distance (transform.position, player.transform.position);
 
-        //If player is close enough
-        if(playerDistance < detectionRange)
+        //If player is close enough and within LOS
+        if (playerDistance < detectionRange)
         {
+            //Only casting ray if player is within detection range to save performance
+            Vector3 playerDirection = (player.transform.position - transform.position).normalized;  //Direction to player
+            RaycastHit hit;
+            Physics.Raycast(transform.position, playerDirection, out hit);
+
+            if (hit.transform.CompareTag("Player"))
             //Moving NavMesh Agent
             agent.SetDestination(playerPos);
 
             chasing = true;
             goingToPoint = false;
             agent.speed = 10.5f;
-            eyes();
+            //eyes();
         }
         else
         {
             chasing = false;
             wander();
-            eyes();
+            //eyes();
         } 
     }
 
     //Sets eyelight state
     void eyes()
     {
-        //Doesnt work as intended.
-
-        /*
         if(eyeLight != null)
         {
-            if(agent.speed != 3)
+            if(chasing)
             {
                 eyeLight.spotAngle = 45f;
                 eyeLight.intensity = 5f;
@@ -86,7 +89,6 @@ public class EnemyController : MonoBehaviour
                 eyeLight.intensity = 2.5f;
             }
         }
-        */
     }
 
     //Is the enemy chasing the player

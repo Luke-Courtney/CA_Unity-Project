@@ -3087,9 +3087,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1354d3a07acf344974d4ea7206b5a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyCount: 1
   enemyPrefab: {fileID: 1520493524710987232, guid: 6ba9b52d6c5f1d94d9f60d038658a1a3, type: 3}
   healthPrefab: {fileID: 3011599310039552474, guid: 48c54da7823912e4e83a632dd1d5ac35, type: 3}
   batteryPrefab: {fileID: 7519459784696616971, guid: f6c558b2cde8c7e45b3e86202c2b49c3, type: 3}
+  largeEnemyPrefab: {fileID: 1081322622535263318, guid: 624376157793f66419f63ab6e9adca9d, type: 3}
+  smallEnemyPrefab: {fileID: 0}
   enemySpawnInterval: 10
   minEnemySpawnInterval: 0.25
   healthSpawnInterval: 45

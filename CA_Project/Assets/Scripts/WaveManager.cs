@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    //Number of enemies spawned
+    public int enemyCount = 1;
+
     //Enemy, health and battery prefabs
     public GameObject enemyPrefab; 
     public GameObject healthPrefab;
     public GameObject batteryPrefab;
+
+    //Special Enemies
+    public GameObject largeEnemyPrefab;
+    public GameObject smallEnemyPrefab;
+    private int specialEnemyInterval = 25;
+    private bool decrementSpecialSpawnInterval; //Should the special spawn interval be reduced this turn?
 
     //Spawn parameters
     private float spawnRangeX = 49;
@@ -41,6 +50,8 @@ public class WaveManager : MonoBehaviour
         InvokeRepeating("SpawnEnemy", startDelay, enemySpawnInterval);
         InvokeRepeating("SpawnHealth", startDelay, healthSpawnInterval);
         InvokeRepeating("SpawnBattery", startDelay, batterySpawnInterval);
+
+        decrementSpecialSpawnInterval = false;
     }
 
     // Update is called once per frame
@@ -75,10 +86,49 @@ public class WaveManager : MonoBehaviour
         //Only spawn new enemies if player is alive
         if(playerController.isAlive())
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 1.0f, Random.Range(-spawnRangeZ,spawnRangeZ));
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 1.0f, Random.Range(-spawnRangeZ, spawnRangeZ));
             spawnPos = NearestNavmeshPoint(spawnPos);
             spawnPos.y = 1.0f;
-            Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+
+            //Check if large enemy spawn interval has been reached and spawn appropriate enemy
+            if (enemyCount % specialEnemyInterval != 0)
+            {
+                Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+            }
+            else
+            {
+                //Which special type to spawn?
+                //0 - Large
+                //1 - Small
+                int randNum = Random.Range(0, 2);
+
+                switch(randNum)
+                {
+                    case 0: //Large
+                        Instantiate(largeEnemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+                        break;
+
+                    case 1: //Small
+                        Instantiate(smallEnemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+                        Instantiate(smallEnemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+                        Instantiate(smallEnemyPrefab, spawnPos, enemyPrefab.transform.rotation);
+                        break;
+                }
+
+                //Should the special enemy spawn interval be decremented this time?
+                //Decrements interval every second spawn
+                if(decrementSpecialSpawnInterval)
+                {
+                    specialEnemyInterval--;
+                    decrementSpecialSpawnInterval = false;
+                }
+                else
+                {
+                    decrementSpecialSpawnInterval = true;
+                }
+            }
+
+            enemyCount++;
         }
         
     }
@@ -115,7 +165,7 @@ public class WaveManager : MonoBehaviour
     Vector3 NearestNavmeshPoint(Vector3 point)
     {
         UnityEngine.AI.NavMeshHit hit;
-        if(UnityEngine.AI.NavMesh.SamplePosition(point, out hit, 2.0f, UnityEngine.AI.NavMesh.AllAreas))
+        if(UnityEngine.AI.NavMesh.SamplePosition(point, out hit, 5.0f, UnityEngine.AI.NavMesh.AllAreas))
         {
             return hit.position;
         }
