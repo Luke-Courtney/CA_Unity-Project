@@ -352,6 +352,7 @@
 "Assets/NavMeshComponents/Scripts/NavMeshModifier.cs"
 "Assets/NavMeshComponents/Scripts/NavMeshModifierVolume.cs"
 "Assets/NavMeshComponents/Scripts/NavMeshSurface.cs"
+"Assets/Scripts/DEVCHEATS.cs"
 "Assets/Scripts/EnemyController.cs"
 "Assets/Scripts/EnemySoundManager.cs"
 "Assets/Scripts/FlashlightDamage.cs"
