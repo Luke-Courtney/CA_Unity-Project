@@ -72,11 +72,11 @@
     <Compile Include="Assets\Scripts\StatDisplay.cs" />
     <Compile Include="Assets\Scripts\ReturnToMenu.cs" />
     <Compile Include="Assets\Scripts\StatTracker.cs" />
+    <Compile Include="Assets\Scripts\MusicManager.cs" />
     <Compile Include="Assets\Scripts\UpgradeUnlocker.cs" />
     <Compile Include="Assets\Scripts\MenuSelection.cs" />
     <Compile Include="Assets\Scripts\WaveManager.cs" />
     <Compile Include="Assets\Scripts\EnemySoundManager.cs" />
-    <Compile Include="Assets\Scripts\MusicManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

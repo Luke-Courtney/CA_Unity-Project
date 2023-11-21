@@ -70,6 +70,9 @@ public class EnemyController : MonoBehaviour
     //Sets eyelight state
     void eyes()
     {
+        //Doesnt work as intended.
+
+        /*
         if(eyeLight != null)
         {
             if(agent.speed != 3)
@@ -83,6 +86,7 @@ public class EnemyController : MonoBehaviour
                 eyeLight.intensity = 2.5f;
             }
         }
+        */
     }
 
     //Is the enemy chasing the player
