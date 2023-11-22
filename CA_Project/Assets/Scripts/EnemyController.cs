@@ -9,12 +9,15 @@ public class EnemyController : MonoBehaviour
 
     private Light eyeLight;
 
-    private float health = 10.0f;
+    public float health = 10.0f;
 
     private GameObject player;    //Player gameobject
     private float playerDistance; //How far is the player?
     public float detectionRange = 10;   //How far away does the enemy detect the player?
     private bool chasing;
+
+    //setDestination timer
+    private float destTimer = 0.5f;
 
     //Wander
     bool goingToPoint;
@@ -57,13 +60,29 @@ public class EnemyController : MonoBehaviour
             Physics.Raycast(transform.position, playerDirection, out hit);
 
             if (hit.transform.CompareTag("Player"))
-            //Moving NavMesh Agent
-            agent.SetDestination(playerPos);
+            {
+                //Moving NavMesh Agent
+                //Delay between setDestination for performance
+                if (destTimer <= 0.5f)
+                {
+                    agent.SetDestination(playerPos);
+                    destTimer = 0;
+                }
+                else
+                {
+                    destTimer += Time.deltaTime;
+                }
 
-            chasing = true;
-            goingToPoint = false;
-            agent.speed = 10.5f;
-            //eyes();
+                chasing = true;
+                goingToPoint = false;
+                agent.speed = 10.5f;
+                //eyes();
+            }
+            else
+            {
+                chasing = false;
+                wander();
+            }
         }
         else
         {

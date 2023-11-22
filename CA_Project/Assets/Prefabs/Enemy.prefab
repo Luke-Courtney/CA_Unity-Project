@@ -217,7 +217,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.5
   m_BaseOffset: 0.25
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1520493524710987241
 MonoBehaviour:
@@ -232,7 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1520493524710987238}
-  detectionRange: 10
+  health: 10
+  detectionRange: 20
 --- !u!82 &62629299257979638
 AudioSource:
   m_ObjectHideFlags: 0

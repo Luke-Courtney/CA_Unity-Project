@@ -15,19 +15,19 @@ public class WaveManager : MonoBehaviour
     //Special Enemies
     public GameObject largeEnemyPrefab;
     public GameObject smallEnemyPrefab;
-    private int specialEnemyInterval = 25;
+    private int specialEnemyInterval = 20;
     private bool decrementSpecialSpawnInterval; //Should the special spawn interval be reduced this turn?
 
     //Spawn parameters
-    private float spawnRangeX = 49;
-    private float spawnRangeZ = 49;
+    private float spawnRangeX = 99;
+    private float spawnRangeZ = 99;
 
     private float startDelay = 5.0f;
 
     //Enemy
-    private float defaultEnemySpawnInterval = 10.0f;
-    public float enemySpawnInterval = 10.0f;
-    public float minEnemySpawnInterval = 0.25f;
+    private float defaultEnemySpawnInterval = 8.0f;
+    public float enemySpawnInterval = 8.0f;
+    public float minEnemySpawnInterval = 0.125f;
 
     //Pickups
     public float healthSpawnInterval = 90.0f;
@@ -88,7 +88,7 @@ public class WaveManager : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 1.0f, Random.Range(-spawnRangeZ, spawnRangeZ));
             spawnPos = NearestNavmeshPoint(spawnPos);
-            spawnPos.y = 1.0f;
+            spawnPos.y += 1.0f;
 
             //Check if large enemy spawn interval has been reached and spawn appropriate enemy
             if (enemyCount % specialEnemyInterval != 0)

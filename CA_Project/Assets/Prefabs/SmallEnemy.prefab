@@ -233,7 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5758993645141909848}
-  detectionRange: 7.5
+  health: 5
+  detectionRange: 15
 --- !u!82 &6497410029409912392
 AudioSource:
   m_ObjectHideFlags: 0
