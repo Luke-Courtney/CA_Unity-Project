@@ -19,6 +19,10 @@ public class UpgradeUnlocker : MonoBehaviour
     private bool hasMovement;
     private int movementUnlockNum = 5;
 
+    //Teleport
+    private bool hasTeleport;
+    private int teleportUnlockNum = 35;
+
     //Audio
     private AudioSource audioSource;
     public AudioClip unlockSound;
@@ -69,6 +73,16 @@ public class UpgradeUnlocker : MonoBehaviour
             {
                 hasMovement = true;
                 GameObject.Find("Player").GetComponent<MovementAbility>().Collected(hasMovement);
+                audioSource.PlayOneShot(unlockSound, 0.7f);
+            }
+        }
+
+        if (!hasTeleport)
+        {
+            if (score >= teleportUnlockNum)
+            {
+                hasTeleport = true;
+                GameObject.Find("Player").GetComponent<Teleport>().Collected(hasTeleport);
                 audioSource.PlayOneShot(unlockSound, 0.7f);
             }
         }

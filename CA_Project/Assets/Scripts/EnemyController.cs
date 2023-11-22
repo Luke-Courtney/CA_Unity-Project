@@ -78,11 +78,6 @@ public class EnemyController : MonoBehaviour
                 agent.speed = 10.5f;
                 //eyes();
             }
-            else
-            {
-                chasing = false;
-                wander();
-            }
         }
         else
         {
