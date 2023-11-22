@@ -30,8 +30,8 @@ public class WaveManager : MonoBehaviour
     public float minEnemySpawnInterval = 0.125f;
 
     //Pickups
-    public float healthSpawnInterval = 90.0f;
-    public float batterySpawnInterval = 30.0f;
+    public float healthSpawnInterval = 60.0f;
+    public float batterySpawnInterval = 20.0f;
 
     //Playercontroller
     private PlayerController playerController;
@@ -141,7 +141,7 @@ public class WaveManager : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
             spawnPos = NearestNavmeshPoint(spawnPos);
-            spawnPos.y = 0.1f;
+            spawnPos.y += 0.05f;
             Instantiate(healthPrefab, spawnPos, healthPrefab.transform.rotation);
         }
         
@@ -155,7 +155,7 @@ public class WaveManager : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
             spawnPos = NearestNavmeshPoint(spawnPos);
-            spawnPos.y = 0.1f;
+            spawnPos.y += 0.05f;
             Instantiate(batteryPrefab, spawnPos, batteryPrefab.transform.rotation);
         }
         

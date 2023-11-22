@@ -16,6 +16,7 @@ ScriptsOnlyBuild:
     - ReturnToMenu
     - StatDisplay
     - StatTracker
+    - Teleport
     - UnityEngine.AI.NavMeshModifier
     - UnityEngine.AI.NavMeshSurface
     - UpgradeUnlocker
@@ -139,25 +140,27 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 1774}
+    - Class: 114
       Script: {instanceID: 1776}
     - Class: 114
-      Script: {instanceID: 1778}
+      Script: {instanceID: 1930}
     - Class: 114
-      Script: {instanceID: 1932}
+      Script: {instanceID: 1966}
     - Class: 114
-      Script: {instanceID: 1968}
+      Script: {instanceID: 2584}
     - Class: 114
-      Script: {instanceID: 2586}
+      Script: {instanceID: 2606}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2706}
     - Class: 114
-      Script: {instanceID: 2708}
+      Script: {instanceID: 2830}
     - Class: 114
-      Script: {instanceID: 2832}
+      Script: {instanceID: 3010}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 3034}
     - Class: 114
-      Script: {instanceID: 3036}
+      Script: {instanceID: 3196}
     - Class: 114
       Script: {instanceID: 3772}
     - Class: 114
@@ -260,13 +263,13 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1932}
+      Script: {instanceID: 1930}
     - Class: 114
-      Script: {instanceID: 2398}
+      Script: {instanceID: 2396}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2606}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 3010}
     - Class: 114
       Script: {instanceID: 3760}
     - Class: 114
@@ -345,13 +348,13 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1932}
+      Script: {instanceID: 1930}
     - Class: 114
-      Script: {instanceID: 2608}
+      Script: {instanceID: 2606}
     - Class: 114
-      Script: {instanceID: 2832}
+      Script: {instanceID: 2830}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 3010}
     - Class: 114
       Script: {instanceID: 3760}
     - Class: 114
@@ -647,6 +650,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnDropdownValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 6149aff3ec4e4d6b3f2dfb071cafb911
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Teleport
   - hash:
       serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030

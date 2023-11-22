@@ -323,6 +323,7 @@
 "Assets/Scripts/StatDisplay.cs"
 "Assets/Scripts/StatTracker.cs"
 "Assets/Scripts/StatWriter.cs"
+"Assets/Scripts/Teleport.cs"
 "Assets/Scripts/UpgradeUnlocker.cs"
 "Assets/Scripts/WaveManager.cs"
 -langversion:9.0
