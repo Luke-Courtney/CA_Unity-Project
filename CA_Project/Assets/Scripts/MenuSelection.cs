@@ -7,15 +7,15 @@ using UnityEngine.SceneManagement;
 public class MenuSelection : MonoBehaviour
 {
     //Selection and selection indicator
-    private int selection;
+    public float selection;
     private GameObject selectionIndicator;
-    private int selectionSpacing = 10;
+    private float selectionSpacing = 7.5f;
 
     //Selector speed
     private float speed = 2.5f;
 
     //Z Position
-    private int initalSelection = 10;
+    private float initalSelection = 0f;
 
     //Sounds
     private AudioSource selectSource;
@@ -44,7 +44,29 @@ public class MenuSelection : MonoBehaviour
     void Selector()
     {
         GetInput();
-        selectionIndicator.transform.position = Vector3.Lerp(selectionIndicator.transform.position, new Vector3(-10, 1, selection), Time.deltaTime * speed);
+        SelectorPos();
+    }
+
+    void SelectorPos()
+    {
+        switch(selection)
+        {
+            case 0:
+                selectionIndicator.transform.position = Vector3.Lerp(selectionIndicator.transform.position, new Vector3(-10, 1, 7.5f), Time.deltaTime * speed);
+                break;
+
+            case 1:
+                selectionIndicator.transform.position = Vector3.Lerp(selectionIndicator.transform.position, new Vector3(-10, 1, 0f), Time.deltaTime * speed);
+                break;
+
+            case 2:
+                selectionIndicator.transform.position = Vector3.Lerp(selectionIndicator.transform.position, new Vector3(-10, 1, -7.5f), Time.deltaTime * speed);
+                break;
+
+            case 3:
+                selectionIndicator.transform.position = Vector3.Lerp(selectionIndicator.transform.position, new Vector3(-10, 1, -15f), Time.deltaTime * speed);
+                break;
+        }
     }
 
 
@@ -52,26 +74,18 @@ public class MenuSelection : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if(selection == 0)
+            if (selection > 0)
             {
-                selection = selectionSpacing;
-            }
-            else if(selection == -selectionSpacing)
-            {
-                selection = 0;
+                selection--;
             }
 
             selectSource.PlayOneShot(selectSound, 0.7f);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            if (selection == selectionSpacing)
+            if(selection < 3)
             {
-                selection = 0;
-            }
-            else if (selection == 0)
-            {
-                selection = -selectionSpacing;
+                selection++;
             }
 
             selectSource.PlayOneShot(selectSound, 0.7f);
@@ -91,15 +105,19 @@ public class MenuSelection : MonoBehaviour
 
             switch (selection)
             {
-                case 10:
+                case 0:
                     SceneManager.LoadScene("Game");
                     break;
 
-                case 0:
+                case 1:
                     SceneManager.LoadScene("Scores");
                     break;
 
-                case -10:
+                case 2:
+                    SceneManager.LoadScene("Tutorial");
+                    break;
+
+                case 3:
                     Application.Quit();
                     break;
             }

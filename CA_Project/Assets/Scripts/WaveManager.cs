@@ -88,7 +88,7 @@ public class WaveManager : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 1.0f, Random.Range(-spawnRangeZ, spawnRangeZ));
             spawnPos = NearestNavmeshPoint(spawnPos);
-            spawnPos.y += 1.0f;
+            spawnPos.y += 2.5f;
 
             //Check if large enemy spawn interval has been reached and spawn appropriate enemy
             if (enemyCount % specialEnemyInterval != 0)
