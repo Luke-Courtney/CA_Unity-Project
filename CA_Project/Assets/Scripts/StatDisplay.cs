@@ -8,7 +8,7 @@ public class StatDisplay : MonoBehaviour
 {
     private string path = "Assets/Stats/stats.txt";
 
-    //File content list
+    //Playerprefs
     private string killsNum;
     private string deathsNum;
     private string pickupsNum;

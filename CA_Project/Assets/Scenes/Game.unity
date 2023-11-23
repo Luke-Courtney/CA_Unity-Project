@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.4245283, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.0125
+  m_FogDensity: 0.008333334
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0
+  m_ReflectionIntensity: 0.25
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0}
+  m_IndirectSpecularColor: {r: 0.045070834, g: 0.05642832, b: 0.07673042, a: 0.25}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: f502e013acd74634681d008aadc6a93c, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -11707,7 +11707,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 3011599310039552474, guid: 48c54da7823912e4e83a632dd1d5ac35, type: 3}
   batteryPrefab: {fileID: 7519459784696616971, guid: f6c558b2cde8c7e45b3e86202c2b49c3, type: 3}
   largeEnemyPrefab: {fileID: 1081322622535263318, guid: 624376157793f66419f63ab6e9adca9d, type: 3}
-  smallEnemyPrefab: {fileID: 0}
+  smallEnemyPrefab: {fileID: 5758993645141909854, guid: 6961226deb1f0c2429e7b6d3f1282553, type: 3}
   enemySpawnInterval: 10
   minEnemySpawnInterval: 0.25
   healthSpawnInterval: 45
@@ -25209,7 +25209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1907956808
 Transform:
   m_ObjectHideFlags: 0
