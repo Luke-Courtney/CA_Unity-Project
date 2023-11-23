@@ -15,7 +15,7 @@ public class WaveManager : MonoBehaviour
     //Special Enemies
     public GameObject largeEnemyPrefab;
     public GameObject smallEnemyPrefab;
-    private int specialEnemyInterval = 20;
+    private int specialEnemyInterval = 15;
     private bool decrementSpecialSpawnInterval; //Should the special spawn interval be reduced this turn?
 
     //Spawn parameters
@@ -139,7 +139,7 @@ public class WaveManager : MonoBehaviour
         //Only spawn new enemies if player is alive
         if(playerController.isAlive())
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.0f, Random.Range(-spawnRangeZ,spawnRangeZ));
             spawnPos = NearestNavmeshPoint(spawnPos);
             spawnPos.y += 0.05f;
             Instantiate(healthPrefab, spawnPos, healthPrefab.transform.rotation);
@@ -153,7 +153,7 @@ public class WaveManager : MonoBehaviour
         //Only spawn new enemies if player is alive
         if(playerController.isAlive())
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.1f, Random.Range(-spawnRangeZ,spawnRangeZ));
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX,spawnRangeX), 0.0f, Random.Range(-spawnRangeZ,spawnRangeZ));
             spawnPos = NearestNavmeshPoint(spawnPos);
             spawnPos.y += 0.05f;
             Instantiate(batteryPrefab, spawnPos, batteryPrefab.transform.rotation);
