@@ -11313,7 +11313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222f6be785c7ea84588a2498dfbb2c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportSound: {fileID: 0}
+  teleportSound: {fileID: 8300000, guid: 77510ae38c4981740b746ccf15567877, type: 3}
   collected: 0
 --- !u!1 &782472187
 GameObject:

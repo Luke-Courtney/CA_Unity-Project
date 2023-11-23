@@ -7,7 +7,7 @@ public class PingAbility : MonoBehaviour
     private Light indicator;
 
     private float lastPing = 0;
-    private float lightPingInterval = 30.0f;
+    private float lightPingInterval = 120.0f;
 
     private float indicatorIntensity;
 
