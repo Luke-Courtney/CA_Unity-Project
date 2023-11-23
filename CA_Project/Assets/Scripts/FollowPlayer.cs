@@ -9,17 +9,29 @@ public class FollowPlayer : MonoBehaviour
     public Vector3 defaultOffset = new Vector3(0,18,0);
     public Vector3 offset;
     private Vector3 targetPos;
+    private bool playerAlive;
 
     void Update()
     {
         fearZoom();
+        playerAlive = player.GetComponent<PlayerController>().isAlive();
     }
 
     void LateUpdate()
     {
-        //Sets camera position to that of player position + offset
-        targetPos = player.transform.position + offset;   
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
+        if (playerAlive)
+        {
+            //Sets camera position to that of player position + offset
+            targetPos = player.transform.position + offset;
+            transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
+        }
+        else
+        {
+            //If the player is dead, camera zooms down through the floor
+            targetPos = player.transform.position + offset;
+            targetPos.y = -1.5f;
+            transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
+        }
     }
 
     void fearZoom()

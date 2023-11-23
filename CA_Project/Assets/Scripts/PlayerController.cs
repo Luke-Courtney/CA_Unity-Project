@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,10 +34,6 @@ public class PlayerController : MonoBehaviour
     //Fear level
     private int fear = 0;
 
-    //Attacks
-    private float lastLightPulse = 0;
-    private float lightPulseInterval = 15.0f;
-
     //Audio
     private AudioSource audioSource;
 
@@ -47,6 +46,12 @@ public class PlayerController : MonoBehaviour
     public AudioClip heartbeat_5;
 
     private int currentFear = 0;
+
+    //StatTracker
+    private StatTracker stats;
+
+    //Menu music to play after death
+    public AudioClip menuMusic;
 
     // Start is called before the first frame update
     void Start()
@@ -79,18 +84,20 @@ public class PlayerController : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = heartbeat_1;
         audioSource.Play();
-    }
 
-    int i = 1;
+        //StatTracker
+        stats = GameObject.Find("StatTracker").GetComponent<StatTracker>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(alive)
+        utilityInput();
+
+        if (alive)
         {
             movement();
             faceMouse();
-            attack();
 
             // Increment the hit timer
             hitTimer += Time.deltaTime;
@@ -109,6 +116,15 @@ public class PlayerController : MonoBehaviour
         fear = 0;
     }
 
+    void utilityInput()
+    { 
+        if(Input.GetKeyDown(KeyCode.Escape  ))
+        {
+            stats.SaveStats();
+            SceneManager.LoadScene("Menu");
+        }
+    }
+
     void movement()
     {
         //Gets input on vertical and horizontal axis
@@ -116,8 +132,9 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
 
         //Move the player
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput ,Space.World);
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput ,Space.World);
+        transform.Translate(forwardInput * speed * Time.deltaTime * Vector3.forward ,Space.World);
+        transform.Translate(horizontalInput * speed * Time.deltaTime * Vector3.right ,Space.World);
+
 
         //Keeps max speed in check
         if(GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
@@ -183,15 +200,11 @@ public class PlayerController : MonoBehaviour
         //Looping through list of all enemies
         if(enemiesList.Count != 0)
         {
-
-            Debug.Log("At least 1 enemy");
             for(int i=0; i<enemiesList.Count; i++)
             {
                 if(enemiesList[i].GetComponent<EnemyController>().IsChasing())
                 {
                     fear++;
-
-                    Debug.Log("Setting heartbeat with Fear of " + fear);
                     SetHeartbeat(fear);
                 }
             }
@@ -219,20 +232,30 @@ public class PlayerController : MonoBehaviour
                 case 2:
                     lifeLight3.intensity = 0;
                     break;
+
                 case 1:
                     lifeLight2.intensity = 0;
                     break;
+
                 case 0:
                     lifeLight1.intensity = 0;
                     flashlight.intensity = 0;
                     alive = false;
-                    Debug.Log("You are dead");
+                    stats.AddDeath();
+
+                    //Playing music
+                    audioSource.Stop();
+                    audioSource.clip = menuMusic;
+                    audioSource.Play();
+
+                    //Save stats
+                    stats.SaveStats();
                     break;
             }
         }
     }
 
-    void heal()
+    void Heal()
     {
         if(lives>=0)
         {
@@ -269,12 +292,14 @@ public class PlayerController : MonoBehaviour
         if(other.GetComponent<Collider>() != null && other.GetComponent<Collider>().gameObject.CompareTag("Health"))
         {
             if(lives<3){
-                heal();
+                Heal();
                 hitTimer = 0;
                 invunerable = true; 
 
                 //Turning off health pickup after use
                 Destroy(other.gameObject);
+
+                stats.AddHealthpack();
             }
         }
 
@@ -286,22 +311,8 @@ public class PlayerController : MonoBehaviour
 
             //Turning off battery pickup after use
             Destroy(other.gameObject);
-        }
-    }
 
-    void attack()
-    {
-        //Lightpulse
-        if(Input.GetMouseButton(0) && lastLightPulse > lightPulseInterval)
-        {
-            //Attack
-            lastLightPulse = 0;
-            gameObject.GetComponent<FlashlightDamage>().lightPulse();
-        }
-        else
-        {
-            //Continue counting time since last attack
-            lastLightPulse += Time.deltaTime;
+            stats.AddBattery();
         }
     }
 
@@ -312,7 +323,6 @@ public class PlayerController : MonoBehaviour
         {
             //Updating current fear
             currentFear++;
-            Debug.Log(currentFear);
             Heartbeat(currentFear);
         }
     }
@@ -323,19 +333,16 @@ public class PlayerController : MonoBehaviour
         switch (level)
         {
             case 0:
-                Debug.Log("Case 0");
                 audioSource.Stop();
                 break;
 
             case 1:
-                Debug.Log("Case 1");
                 audioSource.Stop();
                 audioSource.clip = heartbeat_1;
                 audioSource.Play();
                 break;
 
             case 2:
-                Debug.Log("Case 2");
                 audioSource.Stop();
                 audioSource.clip = heartbeat_2;
                 audioSource.Play();
